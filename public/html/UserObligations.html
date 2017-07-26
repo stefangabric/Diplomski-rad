@@ -1,0 +1,37 @@
+<table ng-init= "getUserObligations()" class="table table-bordered" >
+	<thead class="thead-inverse">
+		<tr>
+			<th>ID</th>
+			<th>Obligation Type</th>
+			<th>Obligation Date</th>
+			<th>Points</th>
+			<th>Subject</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="obligation in obligations">
+			<td>{{ obligation.id }}</td>
+			<td>{{ obligation.obligationType }}</td>
+			<td>{{ obligation.dateOfObligation | date:'dd-MM-yyyy' }}</td>
+			<td>{{ obligation.points }}</td>
+			<td>{{ obligation.subject.name }}</td>
+			<td>
+				<button ng-model="button" ng-click="hideAlerts();deleteObligation(obligation.id)" class="btn btn-xs btn-danger">Delete</button>
+			</td>
+			<td>
+				<a href="#/obligations/edit/{{ obligation.id }}" class="btn btn-xs btn-primary">Edit</a>
+			</td>
+			</tr>
+		
+	</tbody>
+</table>
+<div ng-show="blueAlert" class="alert alert-success">
+	<strong>Success  </strong> You have successfully deleted the obligation {{deleted.obligationType}} . 
+</div>
+<div ng-show="redAlert" class="alert alert-danger">
+	<strong>Greska!</strong> nije obrisano.
+</div>
+<a href="#/addOrUpdateObligation" class="btn btn-success">Add new obligation</a>
+

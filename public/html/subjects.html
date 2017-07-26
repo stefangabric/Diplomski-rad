@@ -1,0 +1,59 @@
+Filter by name:
+<input type="text" ng-model="text">	
+<button  ng-click=getAllSubjects()  class="btn btn-xs btn-info">Search</button>
+<button  ng-click="text=null;getAllSubjects()" class="btn btn-xs btn-primary">Reset</button>
+ <table ng-init= "getAllSubjects()" class=" row table table-bordered" >
+	<thead class="thead-inverse">
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Semester</th>	
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			
+			
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="subject in subjects">
+			<td>{{ subject.id }}</td>
+			<td>{{ subject.name }}</td>
+			<td>{{ subject.semester }}</td>
+			<td>
+				<a  href="#/subjects/{{ subject.id }}/addStudents" class="btn btn-xs btn-success">Add students</a>
+			</td>
+			<td>
+				<button ng-model="button" ng-click="hideAlerts();deleteSubject(subject.id)" class="btn btn-xs btn-danger">Delete</button>
+			</td>
+			<td>
+				<a href="#/subjects/edit/{{ subject.id }}" class="btn btn-xs btn-primary">Edit</a>
+			</td>
+			<td>
+				<a href="#/students/getStudentsInSubject/{{ subject.id }}" class="btn btn-xs btn-success">Students</a>
+			</td>
+		</tr>
+		
+	</tbody>
+</table>
+<div class="row">
+	<div ng-show="blueAlert" class="alert alert-success">
+	  <strong>Success  </strong> You have successfully deleted the subject {{deleted.name}} {{deleted.semester}} . 
+	</div>
+	<div ng-show="redAlert" class="alert alert-danger">
+	  <strong>Error!</strong> cannot be done.
+	</div>
+
+	<a href="#/addOrUpdateSubject" class="btn btn-success">Add new subject</a>
+
+	<button ng-model="button" style="margin-left: 20%" ng-click="hideAlerts();firstPage()"
+		class="btn btn-xs btn-info">First page</button>
+	<button ng-model="button" ng-click="hideAlerts();previousPage()"
+		class="btn btn-xs btn-info">Previous page</button>
+		<button class="btn btn-xs btn-warning">{{pageNum}}</button>
+	<button ng-model="button" ng-click="hideAlerts();nextPage()"
+		class="btn btn-xs btn-info">Next page</button>
+	<button ng-model="button" ng-click="hideAlerts();lastPage()"
+		class="btn btn-xs btn-info">Last page ( {{pageNumMax}} )</button>
+</div>
