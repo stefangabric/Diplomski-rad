@@ -3,32 +3,32 @@ var Schema = mongoose.Schema;
 
 // kreiramo novu shemu
 
-var userSchema = new Schema({
-    role: {
+var transactionSchema = new Schema({
+    purpose: {
         type: String,
         required: true
     },
-    name: {
+    bankAccount: {
         type: String,
         required: true
     },
-    lastname: {
-        type: String,
+    price: {
+        type: Double,
         required: true
     },
-    username: {
+    recipient: {
         type: String,
         required: true,
         unique: true
     },
-    password: {
+    student: {
         type: String,
         required: true,
             }
-},{collection:'User'});
+},{collection:'Transaction'});
 
 // od sheme kreiramo model koji cemo koristiti
-var User = mongoose.model('User', userSchema);
+var Transaction = mongoose.model('Transaction', transactionSchema);
 
 
-module.exports = User;
+module.exports = Transaction;

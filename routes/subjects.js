@@ -13,7 +13,7 @@ db.once('open', function() {
 var myModel=mongoose.model("User");
 // ruter za user
 var userRouter = express.Router();
-// definisanje ruta za korisnike
+// definisanje ruta za predmete
 userRouter.get('/', function(req, res, next) {
     myModel.find(function (err, users) {
         if (err) return console.error(err);
@@ -24,8 +24,8 @@ userRouter.get('/', function(req, res, next) {
 });
 userRouter.get('/add', function(req, res, next) {
     user1= new myModel({
-        role:'admin',
         name:'admin',
+        semester:'2',
         lastname:'admin',
         username:'admin',
         password:'admin'

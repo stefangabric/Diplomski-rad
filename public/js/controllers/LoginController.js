@@ -7,19 +7,16 @@ angular.module('eObrazovanjeApp').controller('LoginController', ['$rootScope', '
 	$scope.credentials = {};
 	
 	$scope.message = "";
-	
+
 	$scope.login = function() {
 		var param = "Basic " + btoa("trusted-app:secret");
 		var data = { "username": $scope.credentials.username, "password": $scope.credentials.password, "grant_type" : "password"};
 		var config = { headers: { "Authorization": param }};
-		/*
-		$http.post('oauth/token', data, config).then(function(response){
-			concole.log(response);
-		});*/
-		
+
+
 		$.ajax({
 			type: 'POST',
-			url: 'http://localhost:8080/oauth/token',	
+			url: 'http://localhost:3000/users/token',
 			headers: {"Authorization": param },
 			data: data,
 			success: function(response){ 
