@@ -2,14 +2,6 @@ var express = require('express');
 var dada=require('./model/professorRole');
 var mongoose=require('mongoose');
 
-//connection to mongo
-mongoose.connect('mongodb://localhost:27017/Diplomski');
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    console.log("supeeer");
-});
-
 var myModel=mongoose.model("ProfessorRole");
 // ruter za professorRole
 var professorRoleRouter = express.Router();
@@ -22,7 +14,7 @@ professorRoleRouter.get('/', function(req, res, next) {
     });
 
 });
-professorRoleRouter.get('/add', function(req, res, next) {
+professorRoleRouter.post('/add', function(req, res, next) {
     professorRole1= new myModel({
         professor:'admin',
         role:'profesor',
@@ -34,5 +26,6 @@ professorRoleRouter.get('/add', function(req, res, next) {
             console.log(professorRole);
         }
     )
+    res.send(professorRole1);
 });
 module.exports = professorRoleRouter;

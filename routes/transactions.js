@@ -2,13 +2,6 @@ var express = require('express');
 var dada=require('./model/transaction');
 var mongoose=require('mongoose');
 
-//connection to mongo
-mongoose.connect('mongodb://localhost:27017/Diplomski');
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    console.log("supeeer");
-});
 
 var myModel=mongoose.model("Transaction");
 // ruter za transaction
@@ -36,6 +29,7 @@ transactionRouter.get('/add', function(req, res, next) {
             console.log(transaction);
         }
     )
+    res.send(tranaction1);
 });
 
 module.exports = transactionRouter;

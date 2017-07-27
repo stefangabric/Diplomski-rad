@@ -35,6 +35,13 @@ app.use('/api/professorRoles', professorRoles);
 app.use('/api/subjects', subjects);
 app.use('/api/transactions',transactions);
 
+//connection to mongo
+mongoose.connect('mongodb://localhost:27017/Diplomski');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+    console.log("supeeer");
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -14,7 +14,7 @@ var obligationSchema = new Schema({
         type: Date
     },
     points: {
-        type: int,
+        type: Number,
         required: true
     },
     subject: {
@@ -25,7 +25,7 @@ var obligationSchema = new Schema({
 },{collection:'Obligation'});
 
 // od sheme kreiramo model koji cemo koristiti
-var Obligation = mongoose.model('obligation', obligationSchema);
+var Obligation = mongoose.model('Obligation', obligationSchema);
 
 
 module.exports = Obligation;
