@@ -13,13 +13,8 @@ professorRoleRouter.get('/', function(req, res, next) {
         res.send(professorRoles);
     });
 
-});
-professorRoleRouter.post('/add', function(req, res, next) {
-    professorRole1= new myModel({
-        professor:'admin',
-        role:'profesor',
-        subject:'engleski'
-    });
+}).post('/',function(req, res, next) {
+    professorRole1= new myModel(req.body);
     professorRole1.save(
         function (err, professorRole) {
             if (err) return console.error(err);
@@ -27,5 +22,26 @@ professorRoleRouter.post('/add', function(req, res, next) {
         }
     )
     res.send(professorRole1);
+}).put('/:id',function(req, res, next) {
+    myModel.findOne({ "_id": req.params.id}
+        , function(err, professorRole) {
+            if (err) next(err);
+            var newProfessorRole = req.body;
+            professorRole.professor = newProfessorRole.professor;
+            professorRole.role = newProfessorRole.role;
+            professorRole.subject = newProfessorRole.subject;
+            professorRole.save(function(err, professorRole1) {
+                if (err) next(err);
+                res.json(professorRole1);
+            });
+
+        });
+}).delete('/:id', function(req, res, next) {
+    myModel.remove({
+        "_id": req.params.id
+    }, function(err, successIndicator) {
+        if (err) next(err);
+        res.json(successIndicator);
+    });
 });
 module.exports = professorRoleRouter;

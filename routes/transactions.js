@@ -14,22 +14,38 @@ transactionRouter.get('/', function(req, res, next) {
         res.send(transactions);
     });
 
-});
-transactionRouter.get('/add', function(req, res, next) {
-    transaction1= new myModel({
-        purpose:'ispit',
-        bankAccount:'223332232323',
-        price:2000,
-        recipient:'ftn',
-        student:'admin'
-    });
+}).post('/',function(req, res, next) {
+    transaction1= new myModel(req.body);
     transaction1.save(
         function (err, transaction) {
             if (err) return console.error(err);
             console.log(transaction);
         }
     )
-    res.send(tranaction1);
+    res.send(transaction1);
+}).put('/:id',function(req, res, next) {
+    myModel.findOne({ "_id": req.params.id}
+        , function(err, transaction) {
+            if (err) next(err);
+            var newTransaction = req.body;
+            transaction.purpose= newTransaction.lpurpose;
+            transaction.bankAccount = newTransaction.bankAccount;
+            transaction.price = newTransaction.price;
+            transaction.recipient = newTransaction.recipient;
+            transaction.student = newTransaction.student;
+            transaction.save(function(err, transaction1) {
+                if (err) next(err);
+                res.json(transaction1);
+            });
+
+        });
+}).delete('/:id', function(req, res, next) {
+    myModel.remove({
+        "_id": req.params.id
+    }, function(err, successIndicator) {
+        if (err) next(err);
+        res.json(successIndicator);
+    });
 });
 
 module.exports = transactionRouter;

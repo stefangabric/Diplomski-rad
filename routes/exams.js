@@ -9,20 +9,14 @@ var myModel=mongoose.model("Exam");
 var examRouter = express.Router();
 // definisanje ruta za ispite
 examRouter.get('/', function(req, res, next) {
-    myModel.find(function (err, exams) {
+    myModel.find(function (err, exam) {
         if (err) return console.error(err);
-        console.log(exams);
-        res.send(exams);
+        console.log(exam);
+        res.send(exam);
     });
 
-});
-examRouter.post('/add', function(req, res, next) {
-    exam1= new myModel({
-        points:80,
-        pass:true,
-        student:'admin',
-        subject:'engleski'
-    });
+}).post('/',function(req, res, next) {
+    exam1= new myModel(req.body);
     exam1.save(
         function (err, exam) {
             if (err) return console.error(err);
@@ -30,6 +24,28 @@ examRouter.post('/add', function(req, res, next) {
         }
     )
     res.send(exam1);
+}).put('/:id',function(req, res, next) {
+    myModel.findOne({ "_id": req.params.id}
+        , function(err, exam) {
+            if (err) next(err);
+            var newExam = req.body;
+            exam.points = newExam.points;
+            exam.pass = newExam.pass;
+            exam.student = newExam.student;
+            exam.subject = newExam.subject;
+            exam.save(function(err, exam1) {
+                if (err) next(err);
+                res.json(exam1);
+            });
+
+        });
+}).delete('/:id', function(req, res, next) {
+    myModel.remove({
+        "_id": req.params.id
+    }, function(err, successIndicator) {
+        if (err) next(err);
+        res.json(successIndicator);
+    });
 });
 
 

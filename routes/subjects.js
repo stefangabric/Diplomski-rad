@@ -14,13 +14,8 @@ subjectRouter.get('/', function(req, res, next) {
         res.send(subjects);
     });
 
-});
-subjectRouter.post('/add', function(req, res, next) {
-    subject1= new myModel({
-        name:'admin',
-        semester:'2',
-        professorRole:'profesor'
-    });
+}).post('/',function(req, res, next) {
+    subject1= new myModel(req.body);
     subject1.save(
         function (err, subject) {
             if (err) return console.error(err);
@@ -28,11 +23,27 @@ subjectRouter.post('/add', function(req, res, next) {
         }
     )
     res.send(subject1);
-});
+}).put('/:id',function(req, res, next) {
+    myModel.findOne({ "_id": req.params.id}
+        , function(err, subject) {
+            if (err) next(err);
+            var newSubject = req.body;
+            subject.name = newSubject.name;
+            subject.semester = newSubject.semester;
+            subject.professorRole = newSubject.professorRole;
 
-subjectRouter.post('/token', function(req, res, next) {
-    console.log("ovde");
+            subject.save(function(err, subject1) {
+                if (err) next(err);
+                res.json(subject1);
+            });
 
-
+        });
+}).delete('/:id', function(req, res, next) {
+    myModel.remove({
+        "_id": req.params.id
+    }, function(err, successIndicator) {
+        if (err) next(err);
+        res.json(successIndicator);
+    });
 });
 module.exports = subjectRouter;

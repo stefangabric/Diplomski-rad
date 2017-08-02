@@ -13,14 +13,8 @@ obligationRouter.get('/', function(req, res, next) {
         res.send(obligations);
     });
 
-});
-obligationRouter.post('/add', function(req, res, next) {
-    obligation1= new myModel({
-        obligationType:'kolokvijum',
-        dateOfObligation:null,
-        points:'50',
-        subject:'engleski'
-    });
+}).post('/',function(req, res, next) {
+    obligation1= new myModel(req.body);
     obligation1.save(
         function (err, obligation) {
             if (err) return console.error(err);
@@ -28,6 +22,28 @@ obligationRouter.post('/add', function(req, res, next) {
         }
     )
     res.send(obligation1);
+}).put('/:id',function(req, res, next) {
+    myModel.findOne({ "_id": req.params.id}
+        , function(err, obligation) {
+            if (err) next(err);
+            var newObligation = req.body;
+            obligation.obligationType = newObligation.obligationType;
+            obligation.dateOfObligation = newObligation.dateOfObligation;
+            obligation.points = newObligation.points;
+            obligation.subject = newObligation.subject;
+            obligation.save(function(err, obligation1) {
+                if (err) next(err);
+                res.json(obligation1);
+            });
+
+        });
+}).delete('/:id', function(req, res, next) {
+    myModel.remove({
+        "_id": req.params.id
+    }, function(err, successIndicator) {
+        if (err) next(err);
+        res.json(successIndicator);
+    });
 });
 
 module.exports = obligationRouter;
