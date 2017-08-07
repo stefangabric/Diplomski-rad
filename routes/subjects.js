@@ -8,11 +8,35 @@ var myModel=mongoose.model("Subject");
 var subjectRouter = express.Router();
 // definisanje ruta za predmete
 subjectRouter.get('/', function(req, res, next) {
+    var filter=req.query.text;
+    var pageNumber=req.query.pageNumber;
+    var pageSize=5;
+    if(req.params.text==undefined){
+        filter="";
+    }
+    var data={};
+    myModel.paginate({name:{$regex : filter }}, { page: pageNumber, limit: pageSize }, function(err, result) {
+        data.content=result.docs;
+        data.number=result.page;
+        data.totalPages=Math.ceil(result.total/result.limit);
+        res.send(data);
+    });
+
+}).get('/all', function(req, res, next) {
     myModel.find(function (err, subjects) {
         if (err) return console.error(err);
         console.log(subjects);
         res.send(subjects);
     });
+
+}).get('/getFor/:id', function(req, res, next) {
+
+
+   /* myModel.find({ student:req.params.id},function (err, subjects) {
+        if (err) return console.error(err);
+        console.log(subjects);
+        res.send(subjects);
+    });*/
 
 }).post('/',function(req, res, next) {
     subject1= new myModel(req.body);

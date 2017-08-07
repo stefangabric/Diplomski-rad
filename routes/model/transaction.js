@@ -18,12 +18,11 @@ var transactionSchema = new Schema({
     },
     recipient: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     student: {
-        type: String,
-        required: true,
+        type: Schema.ObjectId,
+        ref:'User'
             }
 },{collection:'Transaction'});
 

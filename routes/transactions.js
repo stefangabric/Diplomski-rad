@@ -4,6 +4,7 @@ var mongoose=require('mongoose');
 
 
 var myModel=mongoose.model("Transaction");
+
 // ruter za transaction
 var transactionRouter = express.Router();
 // definisanje ruta za transakcije
@@ -28,7 +29,7 @@ transactionRouter.get('/', function(req, res, next) {
         , function(err, transaction) {
             if (err) next(err);
             var newTransaction = req.body;
-            transaction.purpose= newTransaction.lpurpose;
+            transaction.purpose= newTransaction.purpose;
             transaction.bankAccount = newTransaction.bankAccount;
             transaction.price = newTransaction.price;
             transaction.recipient = newTransaction.recipient;

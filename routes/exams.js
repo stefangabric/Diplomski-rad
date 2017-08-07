@@ -15,6 +15,13 @@ examRouter.get('/', function(req, res, next) {
         res.send(exam);
     });
 
+}).get('/getFor/:id', function(req, res, next) {
+    myModel.find({ student:req.params.id},function (err, exam) {
+        if (err) return console.error(err);
+        console.log(exam);
+        res.send(exam);
+    });
+
 }).post('/',function(req, res, next) {
     exam1= new myModel(req.body);
     exam1.save(

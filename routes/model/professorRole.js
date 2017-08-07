@@ -7,8 +7,8 @@ var Schema = mongoose.Schema;
 var professorRoleSchema = new Schema({
 
     professor: {
-        type: String,
-        required: true
+        type: Schema.ObjectId,
+        ref:'User'
     },
     role: {
         type: String,

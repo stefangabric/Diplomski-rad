@@ -14,14 +14,14 @@
     <div class="form-group">
         <label class="col-sm-2">Last name</label>
         <div class="col-sm-6">
-            <input  ng-model="student.lastName" class="form-control" />
+            <input  ng-model="student.lastname" class="form-control" />
         </div>
     </div>
     
     <div class="form-group">
         <label class="col-sm-2">User name</label>
         <div class="col-sm-6">
-            <input  ng-model="student.userName" class="form-control" />
+            <input  ng-model="student.username" class="form-control" />
         </div>
     </div>
     
@@ -35,7 +35,7 @@
     <div class="form-group">
         <label class="col-sm-2">JMBG</label>
         <div class="col-sm-6">
-            <input ng-model="student.jmbg" class="form-control" />
+            <input ng-model="student.jMBG" class="form-control" />
         </div>
     </div>
     
@@ -73,7 +73,7 @@
 
     <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button ng-disabled="!student.name||!student.userName||!student.dateOfBirth||!student.password||!student.jmbg||!student.lastName||!student.address||!student.gender" ng-click="saveStudent()" type="submit" class="btn btn-primary" >Save</button>  
+      <button  ng-click="saveStudent()" type="submit" class="btn btn-primary" >Save</button>
 
     </div>
   </div>

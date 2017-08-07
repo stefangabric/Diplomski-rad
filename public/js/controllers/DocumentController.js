@@ -47,7 +47,7 @@ angular.module('eObrazovanjeApp')
 				};
 				
 				$scope.getAllDocuments = function() {
-					$http.get('api/documents/all').success
+					$http.get('api/documents/').success
 						(function(data, status) {
 							$scope.documents = data;
 					}).error(function() {
@@ -58,7 +58,7 @@ angular.module('eObrazovanjeApp')
 				};
 
 				$scope.deleteDocument = function(id) {
-					$http.delete('api/documents/delete/' + id).success(
+					$http.delete('api/documents/' + id).success(
 							function(data, status) {
 								$scope.deleted = data;
 								$scope.blueAlert = true;
@@ -94,7 +94,7 @@ angular.module('eObrazovanjeApp')
 
 					if ($scope.document.id) {
 						// edit stranica
-						$http.put('api/documents/edit/' + $scope.document.id,
+						$http.put('api/documents/' + $scope.document.id,
 								$scope.document).success(function() {
 									window.location ="#/documents/getFor/"+$rootScope.userId;
 						}).error(function() {
@@ -102,7 +102,7 @@ angular.module('eObrazovanjeApp')
 						});
 					} else {
 						// add stranica
-						$http.post('api/documents/add/', $scope.document).success(
+						$http.post('api/documents/', $scope.document).success(
 								function() {
 									window.location ="#/documents/getFor/"+$rootScope.userId;
 								}).error(function() {

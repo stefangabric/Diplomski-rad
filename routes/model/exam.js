@@ -16,12 +16,12 @@ var examSchema = new Schema({
     },
 
     student: {
-        type: String,
-        required: true
+        type: Schema.ObjectId,
+        ref:'User'
     },
     subject: {
-        type: String,
-        required: true
+        type: Schema.ObjectId,
+        ref:'Subject'
     },
    
 },{collection:'Exam'});

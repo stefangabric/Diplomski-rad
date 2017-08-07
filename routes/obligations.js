@@ -7,7 +7,25 @@ var myModel=mongoose.model("Obligation");
 var obligationRouter = express.Router();
 // definisanje ruta za obligacije
 obligationRouter.get('/', function(req, res, next) {
+    var pageNumber=req.params.pageNumber;
+    var pageSize=1;
+    myModel.paginate({}, { page: pageNumber, limit: pageSize }, function(err, result) {
+        data.content=result.docs;
+        data.number=result.page;
+        data.totalPages=Math.ceil(result.total/result.limit);
+        res.send(data);
+    });
+
+}).get('/all', function(req, res, next) {
     myModel.find(function (err, obligations) {
+        if (err) return console.error(err);
+        console.log(obligations);
+        res.send(obligations);
+    });
+
+}).get('/getFor/:id', function(req, res, next) {
+
+    myModel.find({ student:req.params.id},function (err, obligations) {
         if (err) return console.error(err);
         console.log(obligations);
         res.send(obligations);

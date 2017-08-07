@@ -6,8 +6,8 @@ angular.module('eObrazovanjeApp').controller(
 				'$http',
 				'$routeParams',
 				'$location',
-				'authService',
-				
+				//'authService',
+				/*
 				function($rootScope, $scope, $http, $routeParams, $location,authService) {
 					$scope.isLoggedIn = authService.isLoggedIn;
 					
@@ -21,4 +21,8 @@ angular.module('eObrazovanjeApp').controller(
 					$scope.logout = authService.logout;
 				}
 		]
+);*/
+function($rootScope, $scope, $http, $routeParams, $location) {
+ }
+]
 );

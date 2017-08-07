@@ -6,8 +6,9 @@ angular.module('eObrazovanjeApp').controller(
 				'$http',
 				'$routeParams',
 				'$location',
-				'authService',
-				function($rootScope, $scope, $http, $routeParams, authService, $location) {
+			//	'authService',
+			//function($rootScope, $scope, $http, $routeParams, authService, $location) {
+			function($rootScope, $scope, $http, $routeParams,$location) {
 					$rootScope.userId = localStorage.getItem('userId');
 					$scope.getUserSubjects = function() {
 							$http.get('api/subjects/getFor/' + $routeParams.id).success
@@ -56,7 +57,7 @@ angular.module('eObrazovanjeApp').controller(
 
 						});
 					};
-					$scope.pageNumber = 0;
+					$scope.pageNumber = 1;
 					
 					$scope.getAllSubjects = function() {
 						$http.get('api/subjects', {
@@ -68,7 +69,7 @@ angular.module('eObrazovanjeApp').controller(
 						}).success
 							(function(data, status) {
 								$scope.subjects = data.content;
-								$scope.pageNum = data.number + 1;
+								$scope.pageNum = data.number ;
 				                $scope.pageNumMax = data.totalPages;
 
 						}).error(function() {
@@ -83,7 +84,7 @@ angular.module('eObrazovanjeApp').controller(
 
 
 					$scope.deleteSubject = function(id) {
-						$http.delete('api/subjects/delete/' + id).success(
+						$http.delete('api/subjects/' + id).success(
 								function(data, status) {
 									$scope.deleted = data;
 									$scope.blueAlert = true;
@@ -118,7 +119,7 @@ angular.module('eObrazovanjeApp').controller(
 					$scope.saveSubject = function() {
 						if ($scope.subject.id) {
 							// edit stranica
-							$http.put('api/subjects/edit/' + $scope.subject.id,
+							$http.put('api/subjects/' + $scope.subject.id,
 									$scope.subject).success(function() {
 									window.location ="#/subjects";
 
@@ -127,7 +128,7 @@ angular.module('eObrazovanjeApp').controller(
 							});
 						} else {
 							// add stranica
-							$http.post('api/subjects/add/', $scope.subject).success(
+							$http.post('api/subjects/', $scope.subject).success(
 									function() {
 										window.location ="#/subjects";
 									}).error(function() {
@@ -165,7 +166,7 @@ angular.module('eObrazovanjeApp').controller(
 				};
 					// paginacija
 					$scope.previousPage = function () {
-						if ($scope.pageNumber != 0) {
+						if ($scope.pageNumber != 1) {
 							$scope.pageNumber = $scope.pageNumber - 1;
 						}
 						$http.get('api/subjects', {
@@ -176,7 +177,7 @@ angular.module('eObrazovanjeApp').controller(
 						}).success
 							(function(data, status) {
 								$scope.subjects = data.content;
-								$scope.pageNum = data.number + 1;
+								$scope.pageNum = data.number ;
 
 						}).error(function() {
 							alert('Oops, something went wrong!');
@@ -184,7 +185,7 @@ angular.module('eObrazovanjeApp').controller(
 
 					};
 					$scope.firstPage = function () {
-						$scope.pageNumber = 0;
+						$scope.pageNumber = 1;
 
 						$http.get('api/subjects', {
 							params: {
@@ -194,7 +195,7 @@ angular.module('eObrazovanjeApp').controller(
 						}).success
 							(function(data, status) {
 								$scope.subjects = data.content;
-								$scope.pageNum = data.number + 1;
+								$scope.pageNum = data.number ;
 
 						}).error(function() {
 							alert('Oops, something went wrong!');
@@ -202,7 +203,7 @@ angular.module('eObrazovanjeApp').controller(
 
 					};
 					$scope.nextPage = function () {
-						if ($scope.pageNumber + 1 < $scope.pageNumMax) {
+						if ($scope.pageNumber< $scope.pageNumMax) {
 							$scope.pageNumber = $scope.pageNumber + 1;
 						}
 						$http.get('api/subjects', {
@@ -213,14 +214,14 @@ angular.module('eObrazovanjeApp').controller(
 						}).success
 							(function(data, status) {
 								$scope.subjects = data.content;
-								$scope.pageNum = data.number + 1;
+								$scope.pageNum = data.number ;
 
 						}).error(function() {
 							alert('Oops, something went wrong!');
 						});
 					};
 					$scope.lastPage = function () {
-						$scope.pageNumber = $scope.pageNumMax - 1;
+						$scope.pageNumber = $scope.pageNumMax;
 						$http.get('api/subjects', {
 							params: {
 								"pageNumber": $scope.pageNumber
@@ -229,7 +230,7 @@ angular.module('eObrazovanjeApp').controller(
 						}).success
 							(function(data, status) {
 								$scope.subjects = data.content;
-								$scope.pageNum = data.number + 1;
+								$scope.pageNum = data.number;
 
 						}).error(function() {
 							alert('Oops, something went wrong!');

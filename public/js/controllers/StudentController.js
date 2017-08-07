@@ -6,24 +6,25 @@ angular.module('eObrazovanjeApp').controller(
 				'$http',
 				'$routeParams',
 				'$location',
-				'authService',
-				function($rootScope, $scope, $http, $routeParams, authService, $location) {
-					$rootScope.userId = localStorage.getItem('userId');
-					$scope.getStudent = function(id) {
-						$http.get('api/students/all' + id).success(
-								function(data, status) {
-									$scope.student.content = data;
+		//		'authService',
+			//function($rootScope, $scope, $http, $routeParams, authService, $location) {
+                    function($rootScope, $scope, $http, $routeParams, $location) {
+                        $rootScope.userId = localStorage.getItem('userId');
+                        $scope.getStudent = function(id) {
+                            $http.get('api/users/students/all' + id).success(
+                                function(data, status) {
+                                    $scope.student.content = data;
 
-								}).error(function() {
-							$scope.redAlert = true;
+                                }).error(function() {
+                                $scope.redAlert = true;
 
-						});
-					};
+                            });
+                        };
 
-					$scope.pageNumber = 0;
+					$scope.pageNumber = 1;
 
 					$scope.getAllStudents = function() {
-						$http.get('api/students', {
+						$http.get('api/users/students', {
 			                params: {
 			                	"text": $scope.text,
 			                    "pageNumber":$scope.pageNumber
@@ -32,7 +33,7 @@ angular.module('eObrazovanjeApp').controller(
 			            }).success
 							(function(data, status) {
 								$scope.students= data.content;
-								$scope.pageNum = data.number + 1;
+								$scope.pageNum = data.number ;
 				                $scope.pageNumMax = data.totalPages;
 						}).error(function() {
 							alert('Oops, something went wrong!');
@@ -56,7 +57,7 @@ angular.module('eObrazovanjeApp').controller(
 					};
 
 					$scope.deleteStudent = function(id) {
-						$http.delete('api/students/delete/' + id).success(
+						$http.delete('api/users/students/delete/' + id).success(
 								function(data, status) {
 									$scope.deleted = data;
 									$scope.blueAlert = true;
@@ -78,7 +79,7 @@ angular.module('eObrazovanjeApp').controller(
 						$scope.student = {};
 
 						if ($routeParams && $routeParams.id) {
-							$http.get('api/students/' + $routeParams.id).success(
+							$http.get('api/users/students/' + $routeParams.id).success(
 									function(data) {
 										$scope.student = data;
 									}).error(function() {
@@ -89,10 +90,10 @@ angular.module('eObrazovanjeApp').controller(
 					$scope.saveStudent = function() {
 						if ($scope.student.id) {
 							// edit stranica
-							$http.put('api/students/edit/' + $scope.student.id,
+							$http.put('api/users/students' + $scope.student.id,
 									$scope.student).success(function() {
 										if ($scope.isAdmin()) {
-											window.location ="#/students";
+											window.location ="#/users/students";
 										} else if($scope.isStudent()){
 											window.location ="#/subjects/getFor/"+$rootScope.userId;
 										}
@@ -101,9 +102,9 @@ angular.module('eObrazovanjeApp').controller(
 							});
 						} else {
 							// add stranica
-							$http.post('api/students/add/', $scope.student).success(
+							$http.post('api/users/students', $scope.student).success(
 									function() {
-										window.location ="#/students";
+										window.location ="#/users/students";
 									}).error(function() {
 								alert('greska dodavanja!')
 							});
@@ -111,17 +112,17 @@ angular.module('eObrazovanjeApp').controller(
 					};
 					//paginacija
 					$scope.previousPage = function() {
-				    	if ($scope.pageNumber!=0) {
+				    	if ($scope.pageNumber!=1) {
 				    		$scope.pageNumber = $scope.pageNumber-1;
 						}
-				        $http.get('api/students', {
+				        $http.get('api/users/students', {
 				                params: {
 				                    "pageNumber":$scope.pageNumber
 				                }
 				            })
 				            .success(function(data, status) {
 				                $scope.students = data.content;
-				                $scope.pageNum = data.number + 1;
+				                $scope.pageNum = data.number;
 				                
 				            })
 				            .error(function() {
@@ -130,14 +131,14 @@ angular.module('eObrazovanjeApp').controller(
 
 				    };
 				    $scope.firstPage = function() {
-				    	$scope.pageNumber = 0;
-				        $http.get('api/students', {
+				    	$scope.pageNumber = 1;
+				        $http.get('api/users/students', {
 				                params: {"pageNumber":$scope.pageNumber
 				                }
 				            })
 				            .success(function(data, status) {
 				                $scope.students = data.content;
-				                $scope.pageNum = data.number + 1;
+				                $scope.pageNum = data.number;
 				            })
 				            .error(function() {
 				                alert('Oops, something went wrong!');
@@ -145,32 +146,32 @@ angular.module('eObrazovanjeApp').controller(
 
 				    };
 				    $scope.nextPage = function() {
-				    	if ($scope.pageNumber+1<$scope.pageNumMax) {
+				    	if ($scope.pageNumber<$scope.pageNumMax) {
 				    		$scope.pageNumber = $scope.pageNumber+1;
 						}
-				        $http.get('api/students', {
+				        $http.get('api/users/students', {
 				                params: {
 				                    "pageNumber":$scope.pageNumber
 				                }
 				            })
 				            .success(function(data, status) {
 				                $scope.students = data.content;
-				                $scope.pageNum = data.number + 1;
+				                $scope.pageNum = data.number;
 				            })
 				            .error(function() {
 				                alert('Oops, something went wrong!');
 				            });
 				    };
 				    $scope.lastPage = function() {
-				    	$scope.pageNumber = $scope.pageNumMax-1;
-				        $http.get('api/students', {
+				    	$scope.pageNumber = $scope.pageNumMax;
+				        $http.get('api/users/students', {
 			                params: {
 			                    "pageNumber":$scope.pageNumber
 			                }
 			            })
 			            .success(function(data, status) {
 			                $scope.students = data.content;
-			                $scope.pageNum = data.number + 1;
+			                $scope.pageNum = data.number;
 			            })
 				            .error(function() {
 				                alert('Oops, something went wrong!');

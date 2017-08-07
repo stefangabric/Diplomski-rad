@@ -6,11 +6,30 @@ var myModel=mongoose.model("Document");
 // ruter za document
 var documentRouter = express.Router();
 // definisanje ruta za dokumente
-documentRouter.route('/') .get(function(req, res, next) {
+documentRouter.get('/',function(req, res, next) {
+    myModel.
     myModel.find(function (err, documents) {
         if (err) return console.error(err);
         console.log(documents);
         res.send(documents);
+    });
+
+}).get('/:id',function(req, res, next) {
+    myModel.findOne({ "_id": req.params.id}
+        ,function (err, document) {
+        if (err) return console.error(err);
+        console.log(document);
+        res.send(document);
+    });
+
+}).get('/getFor/:student',function(req, res, next) {
+    //nemam pojma jel radi
+
+    myModel.find({ "student": req.params.student}
+        ,function (err, document) {
+        if (err) return console.error(err);
+        console.log(document);
+        res.send(document);
     });
 
 }).post('/',function(req, res, next) {

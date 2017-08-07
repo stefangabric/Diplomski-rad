@@ -5,7 +5,7 @@ Filter by name:
  <table ng-init= "getAllSubjects()" class=" row table table-bordered" >
 	<thead class="thead-inverse">
 		<tr>
-			<th>ID</th>
+			<!--<th>ID</th>-->
 			<th>Name</th>
 			<th>Semester</th>	
 			<th></th>
@@ -18,20 +18,20 @@ Filter by name:
 	</thead>
 	<tbody>
 		<tr ng-repeat="subject in subjects">
-			<td>{{ subject.id }}</td>
+			<!--<td>{{ subject._id }}</td>-->
 			<td>{{ subject.name }}</td>
 			<td>{{ subject.semester }}</td>
 			<td>
-				<a  href="#/subjects/{{ subject.id }}/addStudents" class="btn btn-xs btn-success">Add students</a>
+				<a  href="#/subjects/{{ subject._id }}/addStudents" class="btn btn-xs btn-success">Add students</a>
 			</td>
 			<td>
-				<button ng-model="button" ng-click="hideAlerts();deleteSubject(subject.id)" class="btn btn-xs btn-danger">Delete</button>
+				<button ng-model="button" ng-click="hideAlerts();deleteSubject(subject._id)" class="btn btn-xs btn-danger">Delete</button>
 			</td>
 			<td>
-				<a href="#/subjects/edit/{{ subject.id }}" class="btn btn-xs btn-primary">Edit</a>
+				<a href="#/subjects/edit/{{ subject._id }}" class="btn btn-xs btn-primary">Edit</a>
 			</td>
 			<td>
-				<a href="#/students/getStudentsInSubject/{{ subject.id }}" class="btn btn-xs btn-success">Students</a>
+				<a href="#/students/getStudentsInSubject/{{ subject._id }}" class="btn btn-xs btn-success">Students</a>
 			</td>
 		</tr>
 		
