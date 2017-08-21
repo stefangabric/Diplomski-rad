@@ -33,7 +33,7 @@ angular.module('eObrazovanjeApp').controller(
 							$scope.transaction.studentDTO={
 									"id": $rootScope.userId
 									
-							}
+							};
 							// add stranica
 							$http.post('api/transactions/add/', $scope.transaction).success(
 									function() {

@@ -6,7 +6,6 @@ Filter by name username or last name:
 <table ng-init= "getAllStudents()" class="table table-bordered" >
 	<thead class="thead-inverse">
 		<tr>
-			<th>ID</th>
 			<th>Last name</th>
 			<th>Name</th>
 			<th>username</th>
@@ -21,11 +20,10 @@ Filter by name username or last name:
 	</thead>
 	<tbody>
 		<tr ng-repeat="student in students">
-			<td>{{ student.id }}</td>
-			<td>{{ student.lastName }}</td>
+			<td>{{ student.lastname }}</td>
 			<td>{{ student.name }}</td>
-			<td>{{ student.userName }}</td>
-			<td>{{ student.jmbg }}</td>
+			<td>{{ student.username }}</td>
+			<td>{{ student.jMBG }}</td>
 			<td>{{ student.address }}</td>
 			<td>{{ student.dateOfBirth| date:'dd-MM-yyyy'}}</td>
 			<td>{{ student.gender }}</td>
@@ -52,7 +50,7 @@ Filter by name username or last name:
 	class="btn btn-xs btn-info">First page</button>
 <button ng-model="button" ng-click="hideAlerts();previousPage()"
 	class="btn btn-xs btn-info">Previous page</button>
-	<button class="btn btn-xs btn-warning">{{pageNum}}</button>
+	<button class="btn btn-xs btn-warning">{{pageNumber}}</button>
 <button ng-model="button" ng-click="hideAlerts();nextPage()"
 	class="btn btn-xs btn-info">Next page</button>
 <button ng-model="button" ng-click="hideAlerts();lastPage()"

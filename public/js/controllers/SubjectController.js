@@ -141,7 +141,7 @@ angular.module('eObrazovanjeApp').controller(
 					$scope.addStudentsToSubject = function() {
 							$http.post('api/subjects/addStudentToSubject/'+ $routeParams.id, $scope.tempSubjectDTO).success(
 									function() {
-										var poruka ="uspesno ste dodali : "
+										var poruka ="uspesno ste dodali : ";
 										for ( var i in $scope.tempSubjectDTO.studentsDTO) {
 											poruka+=$scope.tempSubjectDTO.studentsDTO[i].name+ ' '+$scope.tempSubjectDTO.studentsDTO[i].lastName+',  '
 										}

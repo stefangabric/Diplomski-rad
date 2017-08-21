@@ -5,7 +5,7 @@ angular.module('eObrazovanjeApp')
 			link:function(scope,elm,attrs){
 				elm.bind('change', function(){
 					$parse(attrs.fileInput)
-					.assign(scope,elm[0].files)
+					.assign(scope,elm[0].files);
 					scope.$apply()
 				})
 			}
@@ -19,8 +19,9 @@ angular.module('eObrazovanjeApp')
 			'$http',
 			'$routeParams',
 			'$location',
-			'authService',
-			function($rootScope, $scope, $http, $routeParams,  authService,  $location) {
+		//	'authService',
+            //function($rootScope, $scope, $http, $routeParams,  authService,  $location) {
+			function($rootScope, $scope, $http, $routeParams,  $location) {
 				$rootScope.userId = localStorage.getItem('userId');
 				$scope.getDocument = function(id) {
 					$http.get('api/documents/' + id).success(

@@ -105,7 +105,7 @@ angular.module('eObrazovanjeApp').controller(
 							});
 						} else {
 							// add stranica
-							console.log($scope.professorRole)
+							console.log($scope.professorRole);
 							$http.post('api/professorRoles/add/', $scope.professorRole).success(
 									function() {
 										window.location ="#/professorRoles";

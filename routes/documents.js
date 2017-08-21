@@ -7,7 +7,6 @@ var myModel=mongoose.model("Document");
 var documentRouter = express.Router();
 // definisanje ruta za dokumente
 documentRouter.get('/',function(req, res, next) {
-    myModel.
     myModel.find(function (err, documents) {
         if (err) return console.error(err);
         console.log(documents);
@@ -39,7 +38,7 @@ documentRouter.get('/',function(req, res, next) {
             if (err) return console.error(err);
             console.log(document);
         }
-    )
+    );
     res.send(document1);
 }).put('/:id',function(req, res, next) {
     myModel.findOne({ "_id": req.params.id}

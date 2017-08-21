@@ -38,7 +38,7 @@ obligationRouter.get('/', function(req, res, next) {
             if (err) return console.error(err);
             console.log(obligation);
         }
-    )
+    );
     res.send(obligation1);
 }).put('/:id',function(req, res, next) {
     myModel.findOne({ "_id": req.params.id}

@@ -22,7 +22,7 @@ transactionRouter.get('/', function(req, res, next) {
             if (err) return console.error(err);
             console.log(transaction);
         }
-    )
+    );
     res.send(transaction1);
 }).put('/:id',function(req, res, next) {
     myModel.findOne({ "_id": req.params.id}

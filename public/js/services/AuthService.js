@@ -44,7 +44,7 @@ angular.module('eObrazovanjeApp').service('authService', ['$http', 'jwtHelper', 
 			}
     				
         	return false;
-        }
+        };
         
         service.isProfessor = function(){
         	if(!service.isLoggedIn()){
@@ -58,7 +58,7 @@ angular.module('eObrazovanjeApp').service('authService', ['$http', 'jwtHelper', 
 			}
     				
         	return false;
-        }
+        };
         
         service.isStudent = function(){
         	if(!service.isLoggedIn()){
@@ -72,7 +72,7 @@ angular.module('eObrazovanjeApp').service('authService', ['$http', 'jwtHelper', 
 			}
     				
         	return false;
-        }
+        };
      
 
         return service;

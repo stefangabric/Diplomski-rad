@@ -20,7 +20,7 @@ professorRoleRouter.get('/', function(req, res, next) {
             if (err) return console.error(err);
             console.log(professorRole);
         }
-    )
+    );
     res.send(professorRole1);
 }).put('/:id',function(req, res, next) {
     myModel.findOne({ "_id": req.params.id}

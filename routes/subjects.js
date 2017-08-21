@@ -45,7 +45,7 @@ subjectRouter.get('/', function(req, res, next) {
             if (err) return console.error(err);
             console.log(subject);
         }
-    )
+    );
     res.send(subject1);
 }).put('/:id',function(req, res, next) {
     myModel.findOne({ "_id": req.params.id}

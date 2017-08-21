@@ -31,7 +31,7 @@ angular.module('eObrazovanjeApp').controller(
 					})
 					.success(function(data, status) {
 						$scope.professors = data.content;
-						$scope.pageNum = data.number;
+						$scope.pageNumber = data.pageNumber;
 						$scope.pageNumMax = data.totalPages;
 					}).error(function() {
 						alert('Oops, something went wrong!');
@@ -42,7 +42,7 @@ angular.module('eObrazovanjeApp').controller(
 			};
 
 			$scope.deleteProfessor = function(id) {
-				$http.delete('api/users/professors' + id).success(
+				$http.delete('api/users/professors/' + id).success(
 					function(data, status) {
 						$scope.deleted = data;
 						$scope.blueAlert = true;
@@ -65,7 +65,7 @@ angular.module('eObrazovanjeApp').controller(
 
 				if ($routeParams && $routeParams.id) {
 					// ovo je edit stranica
-					$http.get('api/professors/' + $routeParams.id).success(
+					$http.get('api/users/professors/' + $routeParams.id).success(
 						function(data) {
 							$scope.professor = data;
 						}).error(function() {
@@ -77,7 +77,7 @@ angular.module('eObrazovanjeApp').controller(
 			$scope.saveProfessor = function() {
 				if ($scope.professor.id) {
 					// edit stranica
-					$http.put('api/professors/' + $scope.professor.id,
+					$http.put('api/users/professors/' + $scope.professor.id,
 						$scope.professor).success(function() {
 							if ($scope.isAdmin()) {
 								window.location ="#/users/professors";
@@ -90,10 +90,10 @@ angular.module('eObrazovanjeApp').controller(
 					});
 				} else {
 					// add stranica
-					$http.post('api/professors', $scope.professor).success(
+					$http.post('api/users/professors', $scope.professor).success(
 						function() {
 							if ($scope.isAdmin()) {
-								window.location ="#/users//professors";
+								window.location ="#/users/professors";
 							} else if($scope.isProfessor()){
 								window.location ="#/subjects/getFor/"+$rootScope.userId;
 							}
@@ -142,7 +142,7 @@ angular.module('eObrazovanjeApp').controller(
 				if ($scope.pageNumber< $scope.pageNumMax) {
 					$scope.pageNumber = $scope.pageNumber + 1;
 				}
-				$http.get('api/professors', {
+				$http.get('api/users/professors', {
 						params: {
 							"pageNumber": $scope.pageNumber
 
@@ -157,7 +157,7 @@ angular.module('eObrazovanjeApp').controller(
 			};
 			$scope.lastPage = function() {
 				$scope.pageNumber = $scope.pageNumMax;
-				$http.get('api/professors', {
+				$http.get('api/users/professors', {
 						params: {
 							"pageNumber": $scope.pageNumber
 						}

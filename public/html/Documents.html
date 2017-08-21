@@ -1,7 +1,6 @@
  <table ng-init= "getAllDocuments()" class="table table-bordered" >
 	<thead class="thead-inverse">
 		<tr>
-			<th>ID</th>
 			<th>Name</th>
 			<th></th>
 			<th></th>	
@@ -9,7 +8,6 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="document in documents">
-			<td>{{ document.id }}</td>
 			<td>{{ document.name }}</td>
 
 			<td>
@@ -22,4 +20,4 @@
 		
 	</tbody>
 </table>
-<a ng-show="isStudent()" href="#/addOrUpdateDocument" class="btn btn-success">Add new document</a>
+<a href="#/addOrUpdateDocument" class="btn btn-success">Add new document</a>
