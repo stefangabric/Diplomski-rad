@@ -1,5 +1,5 @@
 'use stirict';
-angular.module('eObrazovanjeApp', [ 'angular-jwt' ,'ngRoute']).config(
+var app=angular.module('eObrazovanjeApp', [ 'angular-jwt' ,'ui.router','ngRoute','ngStorage']).config(
     [ '$routeProvider', function($routeProvider) {
         $routeProvider.when('/login', {
             templateUrl : '/html/login.html',

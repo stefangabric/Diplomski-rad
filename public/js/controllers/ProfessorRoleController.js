@@ -6,8 +6,8 @@ angular.module('eObrazovanjeApp').controller(
 				'$http',
 				'$routeParams',
 				'$location',
-				'authService',
-				function($rootScope, $scope, $http, $routeParams, authService, $location) {
+				'AuthService',
+				function($rootScope, $scope, $http, $routeParams, AuthService, $location) {
 					$rootScope.userId = localStorage.getItem('userId');
 					$scope.getProfessorRole = function(id) {
 						$http.get('api/professorRoles/' + id).success(

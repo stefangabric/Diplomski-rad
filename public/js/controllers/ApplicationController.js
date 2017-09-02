@@ -1,28 +1,48 @@
 angular.module('eObrazovanjeApp').controller(
 		'ApplicationController',
 		[
+				'jwtHelper',
+
 				'$rootScope',
 				'$scope',
 				'$http',
 				'$routeParams',
 				'$location',
-				//'authService',
-				/*
-				function($rootScope, $scope, $http, $routeParams, $location,authService) {
-					$scope.isLoggedIn = authService.isLoggedIn;
-					
-					$scope.isAdmin = authService.isAdmin;
-					
-					$scope.isProfessor = authService.isProfessor;
-					
-					$scope.isStudent = authService.isStudent;
+            	'AuthService',
 
 
-					$scope.logout = authService.logout;
+
+
+				function($localStorage,$rootScope, $scope, $http, $routeParams, $location,AuthService) {
+
+                    console.log(AuthService);
+                    if(AuthService.getCurrentUser()!=undefined){
+                        $scope.isAdmin = function()
+                        {
+                        	if (AuthService.getCurrentUser().role=="admin"){
+                        		return true;
+							}
+							else{return false;}
+						};
+
+                        $scope.isProfessor =function()
+                        {
+                            if (AuthService.getCurrentUser().role=="professor"){
+                                return true;
+                            }
+                            else{
+                            	return false;}
+                        };
+
+                        $scope.isStudent = function()
+                        {
+                            if (AuthService.getCurrentUser().role=="student"){
+                                return true;
+                            }
+                            else{return false;}
+                        };
+					}
+
 				}
 		]
-);*/
-function($rootScope, $scope, $http, $routeParams, $location) {
- }
-]
 );

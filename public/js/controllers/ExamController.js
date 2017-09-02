@@ -6,7 +6,7 @@ angular.module('eObrazovanjeApp').controller(
 			'$http',
 			'$routeParams',
 			'$location',
-			'authService',
+			'AuthService',
 			function($rootScope, $scope, $http, $routeParams, authService,  $location) {
 				$rootScope.userId = localStorage.getItem('userId');
 				$scope.getExam = function(id) {
@@ -45,7 +45,7 @@ angular.module('eObrazovanjeApp').controller(
 				};
 				
 				$scope.getAllExams = function() {
-					$http.get('api/exams/all').success
+					$http.get('api/exams/').success
 						(function(data, status) {
 							$scope.exams = data;
 					}).error(function() {
