@@ -15,8 +15,8 @@ var professorRoleSchema = new Schema({
         required: true
     },
     subject: {
-        type: String,
-        required: true
+        type: Schema.ObjectId,
+        ref:'Subject'
     }
    
 },{collection:'ProfessorRole'});

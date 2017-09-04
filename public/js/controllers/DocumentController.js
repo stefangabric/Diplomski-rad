@@ -22,8 +22,9 @@ angular.module('eObrazovanjeApp')
 		//	'authService',
             //function($rootScope, $scope, $http, $routeParams,  authService,  $location) {
 			function($rootScope, $scope, $http, $routeParams,  $location) {
-				$rootScope.userId = localStorage.getItem('userId');
-				$scope.getDocument = function(id) {
+
+                $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
+                $scope.getDocument = function(id) {
 					$http.get('api/documents/' + id).success(
 							function(data, status) {
 								$scope.document = data;
@@ -93,9 +94,9 @@ angular.module('eObrazovanjeApp')
 					
 					$scope.document.studentID= $rootScope.userId;
 
-					if ($scope.document.id) {
+					if ($scope.document._id) {
 						// edit stranica
-						$http.put('api/documents/' + $scope.document.id,
+						$http.put('api/documents/' + $scope.document._id,
 								$scope.document).success(function() {
 									window.location ="#/documents/getFor/"+$rootScope.userId;
 						}).error(function() {

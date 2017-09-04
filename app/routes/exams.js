@@ -13,7 +13,7 @@ examRouter.get('/', function(req, res, next) {
         if (err) return console.error(err);
         console.log(exam);
         res.send(exam);
-    });
+    }).populate('student').populate('subject');
 
 }).get('/getFor/:student', function(req, res, next) {
 
@@ -22,7 +22,7 @@ examRouter.get('/', function(req, res, next) {
         if (err) return console.error(err);
         console.log(subjects);
         res.send(subjects);
-    });
+    }).populate('student').populate('subject');
 
 }).post('/',function(req, res, next) {
     exam1= new myModel(req.body);

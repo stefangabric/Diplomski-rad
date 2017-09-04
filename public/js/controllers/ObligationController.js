@@ -5,9 +5,10 @@ angular.module('eObrazovanjeApp').controller(
 		'$http',
 		'$routeParams',
 		'$location',
-		'authService',
-		function($rootScope, $scope, $http, $routeParams, authService, $location) {
-			$rootScope.userId = localStorage.getItem('userId');
+		'AuthService',
+		function($rootScope, $scope, $http, $routeParams, AuthService, $location) {
+
+            $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
 			$scope.getProfessor = function(id) {
 				$http.get('api/obligations/' + id).success(
 					function(data, status) {
@@ -56,7 +57,7 @@ angular.module('eObrazovanjeApp').controller(
 				});
 			};
 			$scope.deleteObligation = function(id) {
-				$http.delete('api/obligations/delete/' + id).success(
+				$http.delete('api/obligations/' + id).success(
 					function(data, status) {
 						$scope.deleted = data;
 						$scope.blueAlert = true;
@@ -93,9 +94,9 @@ angular.module('eObrazovanjeApp').controller(
 			};
 
 			$scope.saveObligation = function() {
-				if ($scope.obligation.id) {
+				if ($scope.obligation._id) {
 					// edit stranica
-					$http.put('api/obligations/edit/' + $scope.obligation.id,
+					$http.put('api/obligations/' + $scope.obligation._id,
 						$scope.obligation).success(function() {
 							if ($scope.isAdmin()) {
 								window.location ="#/obligations";
@@ -109,7 +110,7 @@ angular.module('eObrazovanjeApp').controller(
 					});
 				} else {
 					// add stranica
-					$http.post('api/obligations/add/', $scope.obligation).success(
+					$http.post('api/obligations/', $scope.obligation).success(
 						function() {
 							if ($scope.isAdmin()) {
 								window.location ="#/obligations";

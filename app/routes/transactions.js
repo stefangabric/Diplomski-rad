@@ -13,7 +13,7 @@ transactionRouter.get('/', function(req, res, next) {
         if (err) return console.error(err);
         console.log(transactions);
         res.send(transactions);
-    });
+    }).populate('student');
 
 }).get('/getFor/:student', function(req, res, next) {
 
@@ -22,7 +22,7 @@ transactionRouter.get('/', function(req, res, next) {
          if (err) return console.error(err);
          console.log(subjects);
          res.send(subjects);
-     });
+     }).populate('student');
 
 }).post('/',function(req, res, next) {
     transaction1= new myModel(req.body);

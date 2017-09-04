@@ -27,12 +27,13 @@
                         // prijavljenog korisnika cuva u lokalnom skladistu
                         $localStorage.currentUser = currentUser;
                         $localStorage.userId =userId;
+                        $rootScope.userId=userId;
                         // jwt token dodajemo u to auth header za sve $http zahteve
                         $http.defaults.headers.common.Authorization = response.token;
                         // callback za uspesan login
                         callback(true);
-                        window.location.reload();
                         window.location="#/students";
+                        window.location.reload(false);
                     } else {
                         // callback za neuspesan login
                         callback(false);

@@ -9,8 +9,9 @@ angular.module('eObrazovanjeApp').controller(
 			//	'authService',
 			//function($rootScope, $scope, $http, $routeParams, authService, $location) {
 			function($rootScope, $scope, $http, $routeParams,$location) {
-					$rootScope.userId = localStorage.getItem('userId');
-					$scope.getUserSubjects = function() {
+
+                $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
+                $scope.getUserSubjects = function() {
 							$http.get('api/subjects/getFor/' + $routeParams.id).success
 							(function(data, status) {
 								$scope.subjects = data;
@@ -117,9 +118,9 @@ angular.module('eObrazovanjeApp').controller(
 					};
 
 					$scope.saveSubject = function() {
-						if ($scope.subject.id) {
+						if ($scope.subject._id) {
 							// edit stranica
-							$http.put('api/subjects/' + $scope.subject.id,
+							$http.put('api/subjects/' + $scope.subject._id,
 									$scope.subject).success(function() {
 									window.location ="#/subjects";
 

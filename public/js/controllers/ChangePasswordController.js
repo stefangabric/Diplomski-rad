@@ -8,8 +8,8 @@ angular.module('eObrazovanjeApp').controller(
 				'$location',
 				'authService',
 				function($rootScope, $scope, $http, $routeParams, authService, $location) {
-					$rootScope.userId = localStorage.getItem('userId');
-					
+
+                    $rootScope.userId = localStorage.getItem('ngStorage-userId');
 					$scope.initPassword = function() {
 						$scope.password = {};
 						$scope.password.userID = $routeParams.id

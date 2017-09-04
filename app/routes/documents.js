@@ -11,7 +11,7 @@ documentRouter.get('/',function(req, res, next) {
         if (err) return console.error(err);
         console.log(documents);
         res.send(documents);
-    });
+    }).populate('student');
 
 }).get('/:id',function(req, res, next) {
     myModel.findOne({ "_id": req.params.id}
@@ -19,7 +19,7 @@ documentRouter.get('/',function(req, res, next) {
         if (err) return console.error(err);
         console.log(document);
         res.send(document);
-    });
+    }).populate('student');
 
 }).get('/getFor/:student', function(req, res, next) {
 
@@ -28,7 +28,7 @@ documentRouter.get('/',function(req, res, next) {
         if (err) return console.error(err);
         console.log(subjects);
         res.send(subjects);
-    });
+    }).populate('student');
 
 }).post('/',function(req, res, next) {
     document1= new myModel(req.body);

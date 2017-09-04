@@ -1,7 +1,6 @@
  <table ng-init= "getAllTransactions()" class="table table-bordered" >
 	<thead class="thead-inverse">
 		<tr>
-			<th>ID</th>
 			<th>Purpose</th>
 			<th>BankAccount</th>
 			<th>Price</th>	
@@ -11,12 +10,11 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="transaction in transactions">
-			<td>{{ transaction.id }}</td>
 			<td>{{ transaction.purpose }}</td>
 			<td>{{ transaction.bankAcc }}</td>
 			<td>{{ transaction.price }}</td>
 			<td>{{ transaction.recipient }}</td>
-			<td>{{ transaction.studentDTO.name }}</td>
+			<td>{{ transaction.student.name }}</td>
 			</tr>
 		
 	</tbody>

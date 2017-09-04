@@ -1,20 +1,33 @@
 var express = require('express');
 var dada=require('../model/professorRole');
+var dada1=require('../model/subject');
+var dada2=require('../model/user');
 var mongoose=require('mongoose');
 
 var myModel=mongoose.model("ProfessorRole");
+var professorModel=mongoose.model("User");
+var subjectModel=mongoose.model("Subject");
 // ruter za professorRole
 var professorRoleRouter = express.Router();
 // definisanje ruta za korisnike
 professorRoleRouter.get('/', function(req, res, next) {
     myModel.find(function (err, professorRoles) {
         if (err) return console.error(err);
-        console.log(professorRoles);
         res.send(professorRoles);
-    });
+    }).populate('professor').populate('subject');
+
+}).get('/:id',function(req, res, next) {
+    myModel.findOne({ "_id": req.params.id}
+        ,function (err, role) {
+            if (err) return console.error(err);
+            console.log(role);
+            res.send(role);
+        }).populate('professor').populate('subject');
 
 }).post('/',function(req, res, next) {
+    console.log(req.body);
     professorRole1= new myModel(req.body);
+
     professorRole1.save(
         function (err, professorRole) {
             if (err) return console.error(err);

@@ -8,8 +8,9 @@ angular.module('eObrazovanjeApp').controller(
 			'$location',
 			'AuthService',
 			function($rootScope, $scope, $http, $routeParams, authService,  $location) {
-				$rootScope.userId = localStorage.getItem('userId');
-				$scope.getExam = function(id) {
+
+                $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
+                $scope.getExam = function(id) {
 					$http.get('api/exams/' + id).success(
 							function(data, status) {
 								$scope.exam = data;
@@ -56,7 +57,7 @@ angular.module('eObrazovanjeApp').controller(
 				};
 
 				$scope.deleteExam = function(id) {
-					$http.delete('api/exams/delete/' + id).success(
+					$http.delete('api/exams/' + id).success(
 							function(data, status) {
 								$scope.deleted = data;
 								$scope.blueAlert = true;
@@ -87,9 +88,9 @@ angular.module('eObrazovanjeApp').controller(
 				};
 
 				$scope.saveExam = function() {
-					if ($scope.exam.id) {
+					if ($scope.exam._id) {
 						// edit stranica
-						$http.put('api/exams/edit/' + $scope.exam.id,
+						$http.put('api/exams/edit/' + $scope.exam._id,
 								$scope.exam).success(function() {
 									window.location ="#/subjects/getFor/"+$rootScope.userId;
 						}).error(function() {

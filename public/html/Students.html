@@ -28,13 +28,13 @@ Filter by name username or last name:
 			<td>{{ student.dateOfBirth| date:'dd-MM-yyyy'}}</td>
 			<td>{{ student.gender }}</td>
 			<td>
-				<button ng-model="button" ng-click="hideAlerts();deleteStudent(student.id)" class="btn btn-xs btn-danger">Delete</button>
+				<button ng-model="button" ng-click="hideAlerts();deleteStudent(student._id)" class="btn btn-xs btn-danger">Delete</button>
 			</td>
 			<td>
-				<a href="#/Students/edit/{{ student.id }}" class="btn btn-xs btn-primary">Edit</a>
+				<a href="#/Students/edit/{{ student._id }}" class="btn btn-xs btn-primary">Edit</a>
 			</td>
 			<td>
-				<a href="#/Students/profileOfStudent/{{ student.id }}" class="btn btn-xs btn-warning">See profile</a>
+				<a href="#/Students/profileOfStudent/{{ student._id }}" class="btn btn-xs btn-warning">See profile</a>
 			</td>
 		</tr>
 	</tbody>

@@ -6,9 +6,9 @@ angular.module('eObrazovanjeApp').controller(
 				'$http',
 				'$routeParams',
 				'$location',
-				'authService',
-				function($rootScope, $scope, $http, $routeParams, authService,  $location) {
-					$rootScope.userId = localStorage.getItem('userId');
+				'AuthService',
+				function($rootScope, $scope, $http, $routeParams, AuthService,  $location) {
+                    $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
 					$scope.getUserTransactions = function() {
 						$http.get('api/transactions/getFor/' + $routeParams.id).success
 						(function(data, status) {
@@ -18,7 +18,7 @@ angular.module('eObrazovanjeApp').controller(
 					});
 				};
 					$scope.getAllTransactions = function() {
-						$http.get('api/transactions/all').success
+						$http.get('api/transactions/').success
 							(function(data, status) {
 								$scope.transactions = data;
 
@@ -35,7 +35,7 @@ angular.module('eObrazovanjeApp').controller(
 									
 							};
 							// add stranica
-							$http.post('api/transactions/add/', $scope.transaction).success(
+							$http.post('api/transactions/', $scope.transaction).success(
 									function() {
 										window.location ="#/transactions/getFor/"+$rootScope.userId;
 									}).error(function() {

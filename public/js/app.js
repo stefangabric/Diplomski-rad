@@ -107,7 +107,7 @@ var app=angular.module('eObrazovanjeApp', [ 'angular-jwt' ,'ui.router','ngRoute'
             templateUrl : '/html/changePassword.html',
             controller : 'ChangePasswordController'
         }).otherwise({
-            redirectTo : '/login'
+            redirectTo : '/#'
         });
     } ]);
 

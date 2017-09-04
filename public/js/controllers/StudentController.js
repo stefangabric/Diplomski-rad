@@ -6,12 +6,11 @@ angular.module('eObrazovanjeApp').controller(
 				'$http',
 				'$routeParams',
 				'$location',
-		//		'authService',
-			//function($rootScope, $scope, $http, $routeParams, authService, $location) {
                     function($rootScope, $scope, $http, $routeParams, $location) {
-                        $rootScope.userId = localStorage.getItem('userId');
+                        $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
+                        console.log($rootScope.userId);
                         $scope.getStudent = function(id) {
-                            $http.get('api/users/students/all' + id).success(
+                            $http.get('api/users/' + id).success(
                                 function(data, status) {
                                     $scope.student.content = data;
 
@@ -36,7 +35,7 @@ angular.module('eObrazovanjeApp').controller(
 								$scope.pageNum = data.number ;
 				                $scope.pageNumMax = data.totalPages;
 						}).error(function() {
-							alert('Oops, something went wrong!');
+							console.log("");
 						});
 
 						$scope.resetFilter = function() {
@@ -57,7 +56,7 @@ angular.module('eObrazovanjeApp').controller(
 					};
 
 					$scope.deleteStudent = function(id) {
-						$http.delete('api/users/students/delete/' + id).success(
+						$http.delete('api/users/students/' + id).success(
 								function(data, status) {
 									$scope.deleted = data;
 									$scope.blueAlert = true;
@@ -79,7 +78,7 @@ angular.module('eObrazovanjeApp').controller(
 						$scope.student = {};
 
 						if ($routeParams && $routeParams.id) {
-							$http.get('api/users/students/' + $routeParams.id).success(
+							$http.get('api/users/' + $routeParams.id).success(
 									function(data) {
 										$scope.student = data;
 									}).error(function() {
@@ -88,9 +87,9 @@ angular.module('eObrazovanjeApp').controller(
 					};
 
 					$scope.saveStudent = function() {
-						if ($scope.student.id) {
+						if ($scope.student._id) {
 							// edit stranica
-							$http.put('api/users/students' + $scope.student.id,
+							$http.put('api/users/students/' + $scope.student._id,
 									$scope.student).success(function() {
 										if ($scope.isAdmin()) {
 											window.location ="#/users/students";

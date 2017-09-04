@@ -1,7 +1,6 @@
  <table ng-init= "getAllExams()" class="table table-bordered" >
 	<thead class="thead-inverse">
 		<tr>
-			<th>ID</th>
 			<th>Points</th>
 			<th>Pass</th>
 			<th>Subject</th>
@@ -11,7 +10,6 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="exam in exams">
-			<td>{{ exam.id }}</td>
 			<td>{{ exam.points }}</td>
 			<td>{{ exam.pass }}</td>
 			<td>{{ exam.subjectName}}</td>

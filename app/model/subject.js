@@ -21,7 +21,7 @@ var subjectSchema = new Schema({
         ref:'ProfessorRole',
         required: false
     },
-    students : [{ type: Schema.Types.ObjectId, ref: 'Student',required: false }],
+    students : [{ type: Schema.Types.ObjectId, ref: 'User',required: false }],
     obligations : [{ type: Schema.Types.ObjectId, ref: 'Obligation',required: false }]
 
 },{collection:'Subject'});

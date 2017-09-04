@@ -1,15 +1,17 @@
 angular.module('eObrazovanjeApp').controller(
 		'PictureController',
 		[
+
 				'$rootScope',
 				'$scope',
 				'$http',
 				'$routeParams',
 				'$location',
-				'authService',
-				function($rootScope, $scope, $http, $routeParams, authService, $location) {
-					$rootScope.userId = localStorage.getItem('userId');
-					var id = $routeParams.id;
+				'AuthService',
+				function($rootScope, $scope, $http, $routeParams, AuthService, $location) {
+
+                    $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
+                    var id = $routeParams.id;
 				    	
 				    	$http.get("api/documents/downloadPicture/" + id)
 				        .then( function(response){

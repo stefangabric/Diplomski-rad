@@ -27,7 +27,15 @@ subjectRouter.get('/', function(req, res, next) {
         if (err) return console.error(err);
         console.log(subjects);
         res.send(subjects);
-    });
+    }).populate('students').populate('professorRole');
+
+}).get('/:id',function(req, res, next) {
+    myModel.findOne({ "_id": req.params.id}
+        ,function (err, subject) {
+            if (err) return console.error(err);
+            console.log(subject);
+            res.send(subject);
+        }).populate('subjects').populate('students').populate('professorRole');
 
 }).get('/getFor/:student', function(req, res, next) {
 
@@ -35,7 +43,7 @@ subjectRouter.get('/', function(req, res, next) {
         if (err) return console.error(err);
         console.log(nesto);
         res.send(nesto);
-    });
+    }).populate('students').populate('professorRole');
 
 }).post('/',function(req, res, next) {
     subject1= new myModel(req.body);

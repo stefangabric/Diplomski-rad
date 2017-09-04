@@ -14,14 +14,14 @@ obligationRouter.get('/', function(req, res, next) {
         data.number=result.page;
         data.totalPages=Math.ceil(result.total/result.limit);
         res.send(data);
-    });
+    }).populate('subject');
 
 }).get('/all', function(req, res, next) {
     myModel.find(function (err, obligations) {
         if (err) return console.error(err);
         console.log(obligations);
         res.send(obligations);
-    });
+    }).populate('subject');
 
 }).get('/getFor/:id', function(req, res, next) {
 
@@ -29,7 +29,7 @@ obligationRouter.get('/', function(req, res, next) {
         if (err) return console.error(err);
         console.log(obligations);
         res.send(obligations);
-    });
+    }).populate('subject');
 
 }).post('/',function(req, res, next) {
     obligation1= new myModel(req.body);

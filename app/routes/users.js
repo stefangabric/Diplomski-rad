@@ -1,13 +1,27 @@
 var express = require('express');
 var dada = require('../model/user');
 var mongoose = require('mongoose');
+var passport  = require('passport');
+var config = require('../config/database'); // get db config file
+var jwt = require('jwt-simple');
+require('../config/passport')(passport);
 
 var myModel = mongoose.model("User");
 // ruter za user
 var userRouter = express.Router();
 
 // definisanje ruta za korisnike
-userRouter.get('/professors', function (req, res, next) {
+userRouter.get('/professors',passport.authenticate('jwt', { session: false}), function (req, res, next) {
+    console.log("ed");
+    var token = getToken(req.headers);
+    console.log(token);
+    var decoded = jwt.decode(token, config.secret);
+
+    console.log(decoded);
+    console.log(decoded.role);
+    if(!decoded.role||decoded.role!='admin'){
+        return res.status(403).send({success: false, msg: 'Not allowed.'});
+    }
     var filter = req.query.text;
     var pageNumber = req.query.pageNumber;
     var pageSize = 5;
@@ -29,6 +43,21 @@ userRouter.get('/professors', function (req, res, next) {
         data.totalPages = Math.ceil(result.total / result.limit);
         res.send(data);
     });
+}).get('/professors/all', function (req, res, next) {
+     myModel.find({role: 'professor'}
+       ,function (err,professors) {
+           if (err) return console.error(err);
+           console.log(professors);
+           res.send(professors);
+       }).populate('professorRoles');
+}).get('/students/all', function (req, res, next) {
+
+    myModel.find({role: 'student'}
+        ,function (err,students) {
+            if (err) return console.error(err);
+            console.log(students);
+            res.send(students);
+        }).populate('subjects').populate('transactions').populate('documents');
 }).get('/students', function (req, res, next) {
 
 
@@ -56,7 +85,7 @@ userRouter.get('/professors', function (req, res, next) {
             if (err) return console.error(err);
             console.log(document);
             res.send(document);
-        });
+        }).populate('subjects');
 
 }).post('/students', function (req, res, next) {
     user1 = new myModel(req.body);

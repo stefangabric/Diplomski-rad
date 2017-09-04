@@ -8,8 +8,9 @@ angular.module('eObrazovanjeApp').controller(
 				'$location',
 				'AuthService',
 				function($rootScope, $scope, $http, $routeParams, AuthService, $location) {
-					$rootScope.userId = localStorage.getItem('userId');
-					$scope.getProfessorRole = function(id) {
+
+                    $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
+                    $scope.getProfessorRole = function(id) {
 						$http.get('api/professorRoles/' + id).success(
 								function(data, status) {
 									$scope.professoRole = data;
@@ -21,7 +22,7 @@ angular.module('eObrazovanjeApp').controller(
 					};
 
 					$scope.getAllProfessorRoles = function() {
-						$http.get('api/professorRoles/all').success
+						$http.get('api/professorRoles').success
 							(function(data, status) {
 								$scope.professorRoles = data;
 
@@ -47,7 +48,7 @@ angular.module('eObrazovanjeApp').controller(
 						}
 					};
 					$scope.getAllProfessors = function() {
-						$http.get('api/professors/all').success
+						$http.get('api/users/professors/all').success
 							(function(data, status) {
 								$scope.professors = data;
 
@@ -62,7 +63,7 @@ angular.module('eObrazovanjeApp').controller(
 
 
 					$scope.deleteProfessorRole = function(id) {
-						$http.delete('api/professorRoles/delete/' + id).success(
+						$http.delete('api/professorRoles/' + id).success(
 								function(data, status) {
 									$scope.deleted = data;
 									$scope.blueAlert = true;
@@ -95,9 +96,9 @@ angular.module('eObrazovanjeApp').controller(
 					};
 
 					$scope.saveProfessorRole = function() {
-						if ($scope.professorRole.id) {
+						if ($scope.professorRole._id) {
 							// edit stranica
-							$http.put('api/professorRoles/edit/' + $scope.professorRole.id,
+							$http.put('api/professorRoles/' + $scope.professorRole._id,
 									$scope.professorRole).success(function() {
 										window.location ="#/professorRoles";
 							}).error(function() {
@@ -106,7 +107,7 @@ angular.module('eObrazovanjeApp').controller(
 						} else {
 							// add stranica
 							console.log($scope.professorRole);
-							$http.post('api/professorRoles/add/', $scope.professorRole).success(
+							$http.post('api/professorRoles/', $scope.professorRole).success(
 									function() {
 										window.location ="#/professorRoles";
 									}).error(function() {

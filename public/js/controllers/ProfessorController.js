@@ -8,7 +8,7 @@ angular.module('eObrazovanjeApp').controller(
 	//	'authService',
 		//function($rootScope, $scope, $http, $routeParams, authService, $location) {
 		function($rootScope, $scope, $http, $routeParams, $location) {
-			$rootScope.userId = localStorage.getItem('userId');
+            $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
 			$scope.getProfessor = function(id) {
 				$http.get('api/users/professors/' + id).success(
 					function(data, status) {
@@ -65,7 +65,7 @@ angular.module('eObrazovanjeApp').controller(
 
 				if ($routeParams && $routeParams.id) {
 					// ovo je edit stranica
-					$http.get('api/users/professors/' + $routeParams.id).success(
+					$http.get('api/users/' + $routeParams.id).success(
 						function(data) {
 							$scope.professor = data;
 						}).error(function() {
@@ -75,9 +75,9 @@ angular.module('eObrazovanjeApp').controller(
 			};
 
 			$scope.saveProfessor = function() {
-				if ($scope.professor.id) {
+				if ($scope.professor._id) {
 					// edit stranica
-					$http.put('api/users/professors/' + $scope.professor.id,
+					$http.put('api/users/professors/' + $scope.professor._id,
 						$scope.professor).success(function() {
 							if ($scope.isAdmin()) {
 								window.location ="#/users/professors";

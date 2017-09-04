@@ -1,7 +1,6 @@
  <table ng-init= "getAllProfessorRoles()" class="table table-bordered" >
 	<thead class="thead-inverse">
 		<tr>
-			<th>ID</th>
 			<th>Role</th>
 			<th>Professor</th>
 			<th>Subject</th>
@@ -11,16 +10,15 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="professorRole in professorRoles">
-			<td>{{ professorRole.id }}</td>
 			<td>{{ professorRole.role }}</td>
-			<td>{{ professorRole.professorDTO.name }}</td>
-			<td>{{ professorRole.subjectDTO.name}}</td>
+			<td>{{ professorRole.professor.name }}</td>
+			<td>{{ professorRole.subject.name}}</td>
 
 			<td>
-				<button ng-model="button" ng-click="hideAlerts();deleteProfessorRole(professorRole.id)" class="btn btn-xs btn-danger">Delete</button>
+				<button ng-model="button" ng-click="hideAlerts();deleteProfessorRole(professorRole._id)" class="btn btn-xs btn-danger">Delete</button>
 			</td>
 			<td>
-				<a href="#/professorRoles/edit/{{ professorRole.id }}" class="btn btn-xs btn-primary">Edit</a>
+				<a href="#/professorRoles/edit/{{ professorRole._id }}" class="btn btn-xs btn-primary">Edit</a>
 			</td>
 		</tr>
 		
