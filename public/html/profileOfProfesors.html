@@ -7,8 +7,7 @@
             </div>
             <div class="panel-body">
               <div class="row">
-                <div ng-controller="PictureController" class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" ng-src="{{availableImages[0].src}}" class="img-circle img-responsive"> </div>
-
+                <div  class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" ng-src="{{professor.picturePath}} " class="img-circle img-responsive"> </div>
                 <div class=" col-md-9 col-lg-9 "> 
                   <table class="table table-user-information">
                     <tbody>
@@ -18,16 +17,16 @@
                       </tr>
 						<tr>
                         <td>Last name:</td>
-                        <td>{{professor.lastName}}</td>
+                        <td>{{professor.lastname}}</td>
                       </tr>
                       <tr>
                       <tr>
                         <td>User name:</td>
-                        <td>{{professor.userName}}</td>
+                        <td>{{professor.username}}</td>
                       </tr>
                       <tr>
                         <td>JMBG:</td>
-                        <td>{{professor.jmbg}}</td>
+                        <td>{{professor.jMVG}}</td>
                       </tr>
                       <tr>
                         <td>Date of Birth</td>
@@ -51,10 +50,10 @@
               </div>
             </div>
          	 <div class="panel-footer">
-					<a data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning" href="#/professors/edit/{{ professor.id }}" class="btn btn-xs btn-primary">Edit</a><br>
+					<a data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning" href="#/users/professors/edit/{{ professor._id }}" class="btn btn-xs btn-primary">Edit</a><br>
                 </div>
             	<div class="panel-footer" ng-show="isProfessor()">
-					<a  data-original-title="Change password" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning" href="#/changePassword/{{ professor.id }}" class="btn btn-xs btn-primary">Change password</a><br>
+					<a  data-original-title="Change password" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning" href="#/changePassword/{{ professor._id }}" class="btn btn-xs btn-primary">Change password</a><br>
                 </div>
           </div>
         </div>

@@ -22,7 +22,10 @@ angular.module('eObrazovanjeApp')
 		//	'authService',
             //function($rootScope, $scope, $http, $routeParams,  authService,  $location) {
 			function($rootScope, $scope, $http, $routeParams,  $location) {
-
+                if (localStorage.getItem('ngStorage-token')) {
+                    $http.defaults.headers.common.Authorization = localStorage.getItem('ngStorage-token');
+                    console.log($http.defaults.headers.common);
+                }
                 $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
                 $scope.getDocument = function(id) {
 					$http.get('api/documents/' + id).success(
@@ -92,7 +95,7 @@ angular.module('eObrazovanjeApp')
 
 				$scope.saveDocument = function() {
 					
-					$scope.document.studentID= $rootScope.userId;
+					$scope.document.student= $rootScope.userId;
 
 					if ($scope.document._id) {
 						// edit stranica
@@ -123,12 +126,13 @@ angular.module('eObrazovanjeApp')
 					angular.forEach($scope.files,function(file){
 						fd.append('file', file)
 					});
-					$http.post('api/documents/uploadAngular', fd,{
+					$http.post('api/documents/uploadAngular/'+$rootScope.userId, fd,{
 						transformRequest:angular.identity,	
 						headers:{'Content-Type': undefined}
 					})
 					.success(function(data){
-						$scope.document.path = data;
+						$scope.document.path = "uploads/"+data.filename;
+						$scope.document.student=$rootScope.userId;
 					});
 					
 				};

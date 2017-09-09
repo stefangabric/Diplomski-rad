@@ -1,7 +1,6 @@
  <table ng-init= "getAllExamsForUser()" class="table table-bordered" >
 	<thead class="thead-inverse">
 		<tr>
-			<th>ID</th>
 			<th>Points</th>
 			<th>Pass</th>
 			<th>Subject</th>
@@ -10,10 +9,9 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="exam in exams">
-			<td>{{ exam.id }}</td>
 			<td>{{ exam.points }}</td>
 			<td>{{ exam.pass }}</td>
-			<td>{{ exam.subjectName}}</td>
+			<td>{{ exam.subject.name}}</td>
 			<td ng-show="isProfessor()">
 				<a href="#/exams/edit/{{ exam.id }}" class="btn btn-xs btn-primary">Edit</a>
 			</td>

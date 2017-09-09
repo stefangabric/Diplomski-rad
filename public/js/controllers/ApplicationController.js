@@ -14,8 +14,10 @@ angular.module('eObrazovanjeApp').controller(
 
 
 				function($localStorage,$rootScope, $scope, $http, $routeParams, $location,AuthService) {
-
-                    console.log(AuthService);
+                    if (localStorage.getItem('ngStorage-token')) {
+                        $http.defaults.headers.common.Authorization = localStorage.getItem('ngStorage-token');
+                        console.log($http.defaults.headers.common);
+                    }
                     if(AuthService.getCurrentUser()!=undefined){
                         $scope.isAdmin = function()
                         {

@@ -8,7 +8,11 @@ angular.module('eObrazovanjeApp').controller(
 	//	'authService',
 		//function($rootScope, $scope, $http, $routeParams, authService, $location) {
 		function($rootScope, $scope, $http, $routeParams, $location) {
-            $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
+            if (localStorage.getItem('ngStorage-token')) {
+                $http.defaults.headers.common.Authorization = localStorage.getItem('ngStorage-token');
+                console.log($http.defaults.headers.common);
+            }
+		$rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
 			$scope.getProfessor = function(id) {
 				$http.get('api/users/professors/' + id).success(
 					function(data, status) {
@@ -178,11 +182,11 @@ angular.module('eObrazovanjeApp').controller(
 					fd.append('file', file)
 				});
 				$http.post('api/documents/profilePic/'+id, fd,{
-					transformRequest:angular.identity,	
+					transformRequest:angular.identity,
 					headers:{'Content-Type': undefined}
 				})
 				.success(function(data){
-					$scope.professor.picturePath = data;
+					$scope.professor.picturePath = "uploads/"+data.filename;
 				});
 				
 			};

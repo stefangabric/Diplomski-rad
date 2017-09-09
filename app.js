@@ -13,6 +13,7 @@ var professorRoles = require('./app/routes/professorRoles');
 var subjects = require('./app/routes/subjects');
 var transactions = require('./app/routes/transactions');
 var exams= require('./app/routes/exams');
+var passport  = require('passport');
 
 var app = express();
 
@@ -47,7 +48,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     console.log("supeeer");
 });
-
+app.use(passport.initialize());
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

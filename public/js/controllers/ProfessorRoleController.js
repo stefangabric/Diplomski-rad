@@ -8,7 +8,10 @@ angular.module('eObrazovanjeApp').controller(
 				'$location',
 				'AuthService',
 				function($rootScope, $scope, $http, $routeParams, AuthService, $location) {
-
+                    if (localStorage.getItem('ngStorage-token')) {
+                        $http.defaults.headers.common.Authorization = localStorage.getItem('ngStorage-token');
+                        console.log($http.defaults.headers.common);
+                    }
                     $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
                     $scope.getProfessorRole = function(id) {
 						$http.get('api/professorRoles/' + id).success(

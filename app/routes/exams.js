@@ -16,8 +16,6 @@ examRouter.get('/', function(req, res, next) {
     }).populate('student').populate('subject');
 
 }).get('/getFor/:student', function(req, res, next) {
-
-
     myModel.find({ student:req.params.student},function (err, subjects) {
         if (err) return console.error(err);
         console.log(subjects);
@@ -25,6 +23,7 @@ examRouter.get('/', function(req, res, next) {
     }).populate('student').populate('subject');
 
 }).post('/',function(req, res, next) {
+    console.log(req.body);
     exam1= new myModel(req.body);
     exam1.save(
         function (err, exam) {

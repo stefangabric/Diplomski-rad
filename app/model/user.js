@@ -45,6 +45,9 @@ var userSchema = new Schema({
         type: String,
         required: true
             },
+    picturePath: {
+        type: String
+    },
     subjects : [{ type: Schema.Types.ObjectId, ref: 'Subject' }],
     transactions: [{ type: Schema.Types.ObjectId, ref: 'Transaction' }],
     documents : [{ type: Schema.Types.ObjectId, ref: 'Document' }],

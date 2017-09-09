@@ -5,10 +5,15 @@ var mongoose=require('mongoose');
 
 var myModel=mongoose.model("Transaction");
 
+
+var passport = require("passport");
+var passportJWT = require("passport-jwt");
+
 // ruter za transaction
 var transactionRouter = express.Router();
 // definisanje ruta za transakcije
-transactionRouter.get('/', function(req, res, next) {
+transactionRouter.get('/',function(req, res, next) {
+    console.log(req.headers);
     myModel.find(function (err, transactions) {
         if (err) return console.error(err);
         console.log(transactions);

@@ -17,6 +17,7 @@
                     // ukoliko postoji token, prijava je uspecna
                     if (response.token) {
                         // korisnicko ime, token i rola (ako postoji) cuvaju se u lokalnom skladištu
+                        $localStorage.token=response.token;
                         var currentUser = { username: username, token: response.token };
                         var tokenPayload = jwtHelper.decodeToken(response.token);
                         console.log(tokenPayload);
@@ -34,6 +35,8 @@
                         callback(true);
                         window.location="#/students";
                         window.location.reload(false);
+                        $http.defaults.headers.common.Authorization = response.token;
+
                     } else {
                         // callback za neuspesan login
                         callback(false);

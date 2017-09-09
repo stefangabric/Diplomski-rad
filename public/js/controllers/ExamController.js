@@ -8,7 +8,9 @@ angular.module('eObrazovanjeApp').controller(
 			'$location',
 			'AuthService',
 			function($rootScope, $scope, $http, $routeParams, authService,  $location) {
-
+                if (localStorage.getItem('ngStorage-token')) {
+                    $http.defaults.headers.common.Authorization = localStorage.getItem('ngStorage-token');
+                    }
                 $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
                 $scope.getExam = function(id) {
 					$http.get('api/exams/' + id).success(

@@ -1,7 +1,6 @@
 <table ng-init= "getAllDocumentsForUser()" class="table table-bordered" >
 	<thead class="thead-inverse">
 		<tr>
-			<th>ID</th>
 			<th>Name</th>
 			<th></th>
 			<th></th>	
@@ -9,14 +8,13 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="document in documents">
-			<td>{{ document.id }}</td>
 			<td>{{ document.name }}</td>
 
 			<td>
 				<button ng-model="button" ng-click="hideAlerts();deleteDocument(document.id)" class="btn btn-xs btn-danger">Delete</button>
 			</td>
 			<td>
-				<a target="_blank" href="api/documents/download/{{document.id}}" class="btn btn-xs btn-primary">Preview</a>
+				<a target="_blank" href="{{document.path}}" class="btn btn-xs btn-primary">Preview</a>
 			</td>
 		</tr>
 		

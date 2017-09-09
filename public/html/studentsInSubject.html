@@ -1,7 +1,6 @@
 <table ng-init= "getStudentsInSubject()" class="table table-bordered" >
 	<thead class="thead-inverse">
 		<tr>
-			<th>ID</th>
 			<th>Last name</th>
 			<th>Name</th>
 			<th>username</th>
@@ -14,17 +13,16 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="student in students">
-			<td>{{ student.id }}</td>
-			<td>{{ student.lastName }}</td>
+			<td>{{ student.lastname }}</td>
 			<td>{{ student.name }}</td>
-			<td>{{ student.userName }}</td>
-			<td>{{ student.jmbg }}</td>
+			<td>{{ student.username }}</td>
+			<td>{{ student.jMBG }}</td>
 			<td>{{ student.address }}</td>
 			<td>{{ student.dateOfBirth| date:'dd-MM-yyyy'}}</td>
 			<td>{{ student.gender }}</td>
 
 			<td>
-				<a href="#/Students/profileOfStudent/{{ student.id }}" class="btn btn-xs btn-warning">See profile</a>
+				<a href="#/Students/profileOfStudent/{{ student._id }}" class="btn btn-xs btn-warning">See profile</a>
 			</td>
 		</tr>
 	</tbody>

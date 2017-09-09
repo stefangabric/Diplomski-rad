@@ -1,6 +1,9 @@
 var express = require('express');
 var dada=require('../model/document');
 var mongoose=require('mongoose');
+var multer=require('multer');
+var uploadPicture=multer({dest:'./public/uploads',limits: { fileSize: 1024*1024*50 }});
+var uploadDocument=multer({dest:'./public/uploads',limits: { fileSize: 1024*1024*50 }});
 
 var myModel=mongoose.model("Document");
 // ruter za document
@@ -39,6 +42,10 @@ documentRouter.get('/',function(req, res, next) {
         }
     );
     res.send(document1);
+}).post('/profilePic/:id',uploadPicture.single("file"),function(req, res, next) {
+    res.send(req.file);
+}).post('/uploadAngular/:id',uploadDocument.single("file"),function(req, res, next) {
+    res.send(req.file);
 }).put('/:id',function(req, res, next) {
     myModel.findOne({ "_id": req.params.id}
         , function(err, document) {

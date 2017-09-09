@@ -7,8 +7,11 @@ angular.module('eObrazovanjeApp').controller(
 				'$routeParams',
 				'$location',
                     function($rootScope, $scope, $http, $routeParams, $location) {
+                        if (localStorage.getItem('ngStorage-token')) {
+                            $http.defaults.headers.common.Authorization = localStorage.getItem('ngStorage-token');
+                            console.log($http.defaults.headers.common);
+                        }
                         $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
-                        console.log($rootScope.userId);
                         $scope.getStudent = function(id) {
                             $http.get('api/users/' + id).success(
                                 function(data, status) {
@@ -188,7 +191,8 @@ angular.module('eObrazovanjeApp').controller(
 							headers:{'Content-Type': undefined}
 						})
 						.success(function(data){
-							$scope.student.picturePath = data;
+							console.log(data);
+							$scope.student.picturePath = "uploads/"+data.filename;
 						});
 						
 					};

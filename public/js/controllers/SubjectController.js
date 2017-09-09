@@ -9,7 +9,10 @@ angular.module('eObrazovanjeApp').controller(
 			//	'authService',
 			//function($rootScope, $scope, $http, $routeParams, authService, $location) {
 			function($rootScope, $scope, $http, $routeParams,$location) {
-
+                if (localStorage.getItem('ngStorage-token')) {
+                    $http.defaults.headers.common.Authorization = localStorage.getItem('ngStorage-token');
+                    console.log($http.defaults.headers.common);
+                }
                 $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
                 $scope.getUserSubjects = function() {
 							$http.get('api/subjects/getFor/' + $routeParams.id).success
@@ -38,7 +41,7 @@ angular.module('eObrazovanjeApp').controller(
 					
 					
 					$scope.getStudentsInSubject = function() {
-						$http.get('api/students/getStudentsInSubject/' + $routeParams.id).success
+						$http.get('api/users/students/getStudentsInSubject/' + $routeParams.id).success
 						(function(data, status) {
 							$scope.students = data;
 						}).error(function() {
