@@ -1,4 +1,5 @@
 
+var autoref = require('mongoose-autorefs');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -24,6 +25,9 @@ var obligationSchema = new Schema({
    
 },{collection:'Obligation'});
 
+obligationSchema.plugin(autoref, [
+    'subject.obligations'
+]);
 // od sheme kreiramo model koji cemo koristiti
 var Obligation = mongoose.model('Obligation', obligationSchema);
 

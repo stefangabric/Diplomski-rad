@@ -44,6 +44,7 @@ app.use('/api/exams',exams);
 //connection to mongo
 mongoose.connect('mongodb://localhost:27017/Diplomski');
 var db = mongoose.connection;
+mongoose.set('debug', true);
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     console.log("supeeer");

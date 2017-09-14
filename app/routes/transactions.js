@@ -30,7 +30,10 @@ transactionRouter.get('/',function(req, res, next) {
      }).populate('student');
 
 }).post('/',function(req, res, next) {
+
+    console.log(req.body);
     transaction1= new myModel(req.body);
+
     transaction1.save(
         function (err, transaction) {
             if (err) return console.error(err);
@@ -42,6 +45,7 @@ transactionRouter.get('/',function(req, res, next) {
     myModel.findOne({ "_id": req.params.id}
         , function(err, transaction) {
             if (err) next(err);
+            console.log(req.body);
             var newTransaction = req.body;
             transaction.purpose= newTransaction.purpose;
             transaction.bankAccount = newTransaction.bankAccount;

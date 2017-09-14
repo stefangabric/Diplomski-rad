@@ -105,6 +105,25 @@ userRouter.get('/professors',passport.authenticate('jwt', { session: false}), fu
         }
         res.send(studentsFilter);
     });
+}).get('/students/getNotInSubject/:id',function(req, res, next) {
+    var students1=[];
+    var studentsFilter=[];
+    myModel.find({role: 'student'}
+        ,function (err,students) {
+            if (err) return console.error(err);
+            students1=students;
+        }).populate("subjects").exec(function () {
+        studentsFilter=students1;
+        for(var i in students1)
+        {
+            for(var b in students1[i].subjects){
+                if(students1[i].subjects[b]._id==req.params.id){
+                    studentsFilter.splice(students1[i],1);
+                }
+            }
+        }
+        res.send(studentsFilter);
+    });
 }).post('/students', function (req, res, next) {
     user1 = new myModel(req.body);
     user1.password = "dad";
@@ -133,8 +152,11 @@ userRouter.get('/professors',passport.authenticate('jwt', { session: false}), fu
     myModel.findOne({"_id": req.params.id, 'role': 'student'}
         , function (err, user) {
             if (err) next(err);
+            console.log(req.body);
             var newUser = req.body;
             user.name = newUser.name;
+            user.address = newUser.address;
+            user.jMBG = newUser.jMBG;
             user.lastname = newUser.lastname;
             user.username = newUser.username;
             user.password = newUser.password;

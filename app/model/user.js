@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var mongoosePaginate = require('mongoose-paginate');
 var Schema = mongoose.Schema;
-
+var autoref = require('mongoose-autorefs');
 
 
 // kreiramo novu shemu
@@ -51,11 +51,18 @@ var userSchema = new Schema({
     subjects : [{ type: Schema.Types.ObjectId, ref: 'Subject' }],
     transactions: [{ type: Schema.Types.ObjectId, ref: 'Transaction' }],
     documents : [{ type: Schema.Types.ObjectId, ref: 'Document' }],
-    professorRoles : [{ type: Schema.Types.ObjectId, ref: 'ProfessorRole' }]
+    professorRoles : [{ type: Schema.Types.ObjectId, ref: 'ProfessorRole' }],
+    exams : [{ type: Schema.Types.ObjectId, ref: 'Exam' }]
 
 },{collection:'User'});
 
-
+userSchema.plugin(autoref, [
+    'subjects.students',
+    'transactions.students',
+    'documents.student',
+    'professorRoles.professor',
+    'exams.student'
+]);
 
 // od sheme kreiramo model koji cemo koristiti
 userSchema.plugin(mongoosePaginate);

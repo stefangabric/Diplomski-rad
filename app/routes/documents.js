@@ -2,8 +2,26 @@ var express = require('express');
 var dada=require('../model/document');
 var mongoose=require('mongoose');
 var multer=require('multer');
-var uploadPicture=multer({dest:'./public/uploads',limits: { fileSize: 1024*1024*50 }});
-var uploadDocument=multer({dest:'./public/uploads',limits: { fileSize: 1024*1024*50 }});
+var storage1 = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/uploads');
+    },
+    filename: function (req, file, cb) {
+        var ext=file.originalname.split(".")[1];
+        cb(null,Date.now()+"."+ext);
+    }
+});
+var storage2 = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/uploads');
+    },
+    filename: function (req, file, cb) {
+        var ext=file.originalname.split(".")[1];
+        cb(null,Date.now()+"."+ext);
+    }
+});
+var uploadPicture=multer({storage:storage1,limits: { fileSize: 1024*1024*50 }});
+var uploadDocument=multer({storage:storage2});
 
 var myModel=mongoose.model("Document");
 // ruter za document

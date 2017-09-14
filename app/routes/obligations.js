@@ -25,7 +25,7 @@ obligationRouter.get('/', function(req, res, next) {
 
 }).get('/getFor/:id', function(req, res, next) {
 
-    myModel.find({ student:req.params.id},function (err, obligations) {
+    myModel.find({ subject:req.params.id},function (err, obligations) {
         if (err) return console.error(err);
         console.log(obligations);
         res.send(obligations);

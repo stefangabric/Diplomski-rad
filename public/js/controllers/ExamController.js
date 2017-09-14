@@ -21,7 +21,7 @@ angular.module('eObrazovanjeApp').controller(
 					});
 				};
 				$scope.getAllStudents = function() {
-					$http.get('api/students/inSubject/'+$rootScope.subjectId).success
+					$http.get('api/users/students/getStudentsInSubject/'+$rootScope.subjectId).success
 						(function(data, status) {
 							$scope.students= data;
 						
@@ -92,7 +92,7 @@ angular.module('eObrazovanjeApp').controller(
 				$scope.saveExam = function() {
 					if ($scope.exam._id) {
 						// edit stranica
-						$http.put('api/exams/edit/' + $scope.exam._id,
+						$http.put('api/exams/' + $scope.exam._id,
 								$scope.exam).success(function() {
 									window.location ="#/subjects/getFor/"+$rootScope.userId;
 						}).error(function() {
@@ -100,8 +100,8 @@ angular.module('eObrazovanjeApp').controller(
 						});
 					} else {
 						// add stranica
-						$scope.exam.subjectName=$rootScope.subjectId;
-						$http.post('api/exams/add/', $scope.exam).success(
+						$scope.exam.subject=$rootScope.subjectId;
+						$http.post('api/exams/', $scope.exam).success(
 								function() {
 									window.location ="#/subjects/getFor/"+$rootScope.userId;
 								}).error(function() {

@@ -86,7 +86,7 @@ angular.module('eObrazovanjeApp').controller(
 							if ($scope.isAdmin()) {
 								window.location ="#/users/professors";
 							} else if($scope.isProfessor()){
-								window.location ="#/subjects/getFor/"+$rootScope.userId;
+								window.location ="#/subjects/getForP/"+$rootScope.userId;
 							}
 							
 					}).error(function() {
@@ -99,7 +99,7 @@ angular.module('eObrazovanjeApp').controller(
 							if ($scope.isAdmin()) {
 								window.location ="#/users/professors";
 							} else if($scope.isProfessor()){
-								window.location ="#/subjects/getFor/"+$rootScope.userId;
+								window.location ="#/subjects/getForP/"+$rootScope.userId;
 							}
 						}).error(function() {
 						alert('greska dodavanja!')

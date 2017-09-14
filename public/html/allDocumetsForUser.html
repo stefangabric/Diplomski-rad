@@ -11,7 +11,7 @@
 			<td>{{ document.name }}</td>
 
 			<td>
-				<button ng-model="button" ng-click="hideAlerts();deleteDocument(document.id)" class="btn btn-xs btn-danger">Delete</button>
+				<button ng-model="button" ng-click="hideAlerts();deleteDocument(document._id)" class="btn btn-xs btn-danger">Delete</button>
 			</td>
 			<td>
 				<a target="_blank" href="{{document.path}}" class="btn btn-xs btn-primary">Preview</a>

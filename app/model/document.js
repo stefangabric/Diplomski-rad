@@ -1,5 +1,6 @@
 
 var mongoose = require('mongoose');
+var autoref = require('mongoose-autorefs');
 var mongoosePaginate = require('mongoose-paginate');
 
 
@@ -26,6 +27,9 @@ var documentSchema = new Schema({
 
 // od sheme kreiramo model koji cemo koristiti
 documentSchema.plugin(mongoosePaginate);
+documentSchema.plugin(autoref, [
+    'student.documents'
+]);
 var Document = mongoose.model('Document', documentSchema);
 
 module.exports = Document;

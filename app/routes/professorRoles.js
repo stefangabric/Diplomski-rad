@@ -27,10 +27,10 @@ professorRoleRouter.get('/', function(req, res, next) {
 }).post('/',function(req, res, next) {
     console.log(req.body);
     professorRole1= new myModel(req.body);
-
     professorRole1.save(
         function (err, professorRole) {
             if (err) return console.error(err);
+
             console.log(professorRole);
         }
     );

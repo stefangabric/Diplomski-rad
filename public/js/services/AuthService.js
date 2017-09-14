@@ -28,6 +28,7 @@
                         // prijavljenog korisnika cuva u lokalnom skladistu
                         $localStorage.currentUser = currentUser;
                         $localStorage.userId =userId;
+                        $localStorage.role=tokenPayload.role;
                         $rootScope.userId=userId;
                         // jwt token dodajemo u to auth header za sve $http zahteve
                         $http.defaults.headers.common.Authorization = response.token;

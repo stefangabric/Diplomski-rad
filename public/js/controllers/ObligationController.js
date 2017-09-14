@@ -33,7 +33,7 @@ angular.module('eObrazovanjeApp').controller(
 
 			$scope.getSubjects = function(id) {
 				if ($scope.isProfessor()) {
-					$http.get('api/subjects/getFor/'+$rootScope.userId).success(
+					$http.get('api/subjects/getForP/'+$rootScope.userId).success(
 							function(data, status) {
 								$scope.subjects = data;
 

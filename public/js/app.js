@@ -91,7 +91,10 @@ var app=angular.module('eObrazovanjeApp', [ 'angular-jwt' ,'ui.router','ngRoute'
         }).when('/obligations/edit/:id', {
             templateUrl : '/html/addOrUpdateObligation.html',
             controller : 'ObligationController'
-        }).when('/subjects/getFor/:id', {
+        }).when('/subjects/getForS/:id', {
+            templateUrl : '/html/UserSubjects.html',
+            controller : 'SubjectController'
+        }).when('/subjects/getForP/:id', {
             templateUrl : '/html/UserSubjects.html',
             controller : 'SubjectController'
         }).when('/obligations/getFor/:id', {

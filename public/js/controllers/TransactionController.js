@@ -34,10 +34,7 @@ angular.module('eObrazovanjeApp').controller(
 					
 
 					$scope.saveTransaction = function() {
-							$scope.transaction.studentDTO={
-									"id": $rootScope.userId
-									
-							};
+							$scope.transaction.student=$rootScope.userId;
 							// add stranica
 							$http.post('api/transactions/', $scope.transaction).success(
 									function() {

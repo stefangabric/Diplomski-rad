@@ -1,4 +1,4 @@
-
+var autoref = require('mongoose-autorefs');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -21,6 +21,10 @@ var professorRoleSchema = new Schema({
    
 },{collection:'ProfessorRole'});
 
+professorRoleSchema.plugin(autoref, [
+    'subject.professorRoles',
+    'professor.professorRoles'
+]);
 // od sheme kreiramo model koji cemo koristiti
 var ProfessorRole = mongoose.model('ProfessorRole', professorRoleSchema);
 

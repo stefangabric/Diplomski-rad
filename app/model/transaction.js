@@ -1,3 +1,4 @@
+var autoref = require('mongoose-autorefs');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -26,6 +27,9 @@ var transactionSchema = new Schema({
             }
 },{collection:'Transaction'});
 
+transactionSchema.plugin(autoref, [
+    'student.transactions'
+]);
 // od sheme kreiramo model koji cemo koristiti
 var Transaction = mongoose.model('Transaction', transactionSchema);
 

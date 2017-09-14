@@ -43,6 +43,14 @@ angular.module('eObrazovanjeApp').controller(
                             }
                             else{return false;}
                         };
+                        $scope.isLoged = function()
+                        {
+                            if (AuthService.getCurrentUser()!=undefined){
+                                return true;
+                            }
+                            else{return false;}
+                        };
+
 					}
 
 				}

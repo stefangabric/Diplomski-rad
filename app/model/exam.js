@@ -1,4 +1,5 @@
 
+var autoref = require('mongoose-autorefs');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -27,6 +28,10 @@ var examSchema = new Schema({
 },{collection:'Exam'});
 
 // od sheme kreiramo model koji cemo koristiti
+examSchema.plugin(autoref, [
+    'student.exams',
+    'subject.nista'
+]);
 var Exam = mongoose.model('Exam', examSchema);
 
 
