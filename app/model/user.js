@@ -44,17 +44,17 @@ var userSchema = new Schema({
     password: {
         type: String,
         required: true
-            },
+    },
     picturePath: {
         type: String
     },
-    subjects : [{ type: Schema.Types.ObjectId, ref: 'Subject' }],
-    transactions: [{ type: Schema.Types.ObjectId, ref: 'Transaction' }],
-    documents : [{ type: Schema.Types.ObjectId, ref: 'Document' }],
-    professorRoles : [{ type: Schema.Types.ObjectId, ref: 'ProfessorRole' }],
-    exams : [{ type: Schema.Types.ObjectId, ref: 'Exam' }]
+    subjects: [{type: Schema.Types.ObjectId, ref: 'Subject'}],
+    transactions: [{type: Schema.Types.ObjectId, ref: 'Transaction'}],
+    documents: [{type: Schema.Types.ObjectId, ref: 'Document'}],
+    professorRoles: [{type: Schema.Types.ObjectId, ref: 'ProfessorRole'}],
+    exams: [{type: Schema.Types.ObjectId, ref: 'Exam'}]
 
-},{collection:'User'});
+}, {collection: 'User'});
 
 userSchema.plugin(autoref, [
     'subjects.students',

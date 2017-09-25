@@ -20,7 +20,6 @@
                         $localStorage.token=response.token;
                         var currentUser = { username: username, token: response.token };
                         var tokenPayload = jwtHelper.decodeToken(response.token);
-                        console.log(tokenPayload);
                         var userId=tokenPayload._id;
                         if(tokenPayload.role){
                             currentUser.role = tokenPayload.role;

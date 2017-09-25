@@ -23,7 +23,7 @@ Filter by name username or last name:
         <td>{{ professor.lastname }}</td>
         <td>{{ professor.name }}</td>
         <td>{{ professor.username }}</td>
-        <td>{{ professor.jmbg }}</td>
+        <td>{{ professor.jMBG }}</td>
         <td>{{ professor.address }}</td>
         <td>{{ professor.dateOfBirth| date:'dd-MM-yyyy' }}</td>
         <td>{{ professor.gender }}</td>
@@ -34,10 +34,10 @@ Filter by name username or last name:
             </button>
         </td>
         <td>
-            <a href="#/professors/edit/{{ professor.id }}" class="btn btn-xs btn-primary">Edit</a>
+            <a href="#/professors/edit/{{ professor._id }}" class="btn btn-xs btn-primary">Edit</a>
         </td>
         <td>
-            <a href="#/professors/profileOfProfesors/{{ professor.id }}" class="btn btn-xs btn-warning">See profile</a>
+            <a href="#/professors/profileOfProfesors/{{ professor._id }}" class="btn btn-xs btn-warning">See profile</a>
         </td>
     </tr>
     </tbody>

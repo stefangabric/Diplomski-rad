@@ -8,13 +8,16 @@ angular.module('eObrazovanjeApp').controller(
         '$location',
         'AuthService',
         function ($rootScope, $scope, $http, $routeParams, AuthService) {
+            if (localStorage.getItem('ngStorage-userId') == undefined) {
+                window.location = "#/login";
+            }
             if (localStorage.getItem('ngStorage-token')) {
-                $http.defaults.headers.common.Authorization = localStorage.getItem('ngStorage-token');
+                $http.defaults.headers.common.Authorization = localStorage.getItem('ngStorage-token').replace(/['"]+/g, '');
                 console.log($http.defaults.headers.common);
             }
             $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
             $scope.getStudentSubjects = function () {
-                if (localStorage.getItem('ngStorage-role').replace(/['"]+/g, '')=="student") {
+                if (localStorage.getItem('ngStorage-role').replace(/['"]+/g, '') == "student") {
                     $http.get('api/subjects/getForS/' + $routeParams.id).success
                     (function (data, status) {
                         $scope.subjects = data;
@@ -150,7 +153,7 @@ angular.module('eObrazovanjeApp').controller(
 
             $scope.addStudentsToSubject = function () {
                 $http.put('api/subjects/addStudentToSubject/' + $routeParams.id, $scope.tempSubject).success(
-                    function(){
+                    function () {
                         var poruka = "uspesno ste dodali : ";
                         for (var i in $scope.tempSubject.students) {
                             poruka += $scope.tempSubject.students[i].name + ' ' + $scope.tempSubject.students[i].lastName + ',  '

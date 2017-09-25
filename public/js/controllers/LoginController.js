@@ -1,18 +1,19 @@
 (function (angular) {
     angular.module('eObrazovanjeApp')
-        .controller('LoginController', function($scope, $log, AuthService){
+        .controller('LoginController', function ($scope, $log, AuthService) {
             AuthService.logout();
-            $scope.user={};
+            $scope.user = {};
 
-            $scope.login1=function () {
+            $scope.login1 = function () {
 
-                AuthService.login($scope.user.username,$scope.user.password,loginCbck);
+                AuthService.login($scope.user.username, $scope.user.password, loginCbck);
             };
+
             function loginCbck(success) {
                 if (success) {
                     $log.info('success!');
                 }
-                else{
+                else {
                     $log.info('failure!');
                 }
             }
