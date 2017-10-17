@@ -54,6 +54,9 @@ angular.module('eObrazovanjeApp').controller(
                 };
 
             }
+            else{
+                window.location ="#/login";
+            }
 
         }
     ]

@@ -56,13 +56,13 @@
             <li><a class="navbar-brand"  ng-show="isAdmin()"  href="#/professors">Professors</a>   </li>
             <li><a class="navbar-brand"  ng-show="isAdmin()" href="#/professorRoles">Professor roles</a> </li>
             <li><a class="navbar-brand"  ng-show="isAdmin()" href="#/students">Students</a>   </li>
-            <li><a class="navbar-brand"  ng-show="isAdmin()" href="#/subjects">All Subjects</a> </li>
+            <li><a class="navbar-brand"  ng-show="isAdmin()" href="#/subjects">Subjects</a> </li>
             <li><a class="navbar-brand"  ng-show="isStudent()" href="#/subjects/getForS/{{ userId }}" >Subjects</a> </li>
             <li><a class="navbar-brand"  ng-show="isProfessor()" href="#/subjects/getForP/{{ userId }}" >Subjects</a> </li>
-            <li><a class="navbar-brand"  ng-show="isAdmin()" href="#/obligations">All Obligations</a>    </li>
-            <li><a class="navbar-brand"  ng-show="isAdmin()" href="#/transactions">All Transactions</a>   </li>
+            <li><a class="navbar-brand"  ng-show="isAdmin()" href="#/obligations">Obligations</a>    </li>
+            <li><a class="navbar-brand"  ng-show="isAdmin()" href="#/transactions">Transactions</a>   </li>
             <li><a class="navbar-brand"  ng-show="isStudent()" href="#/transactions/getFor/{{ userId }}">Transactions</a>   </li>
-            <li><a class="navbar-brand"  ng-if="isAdmin()" href="#/documents">All Documents</a></li>
+            <li><a class="navbar-brand"  ng-if="isAdmin()" href="#/documents">Documents</a></li>
             <li><a class="navbar-brand"  ng-show="isStudent()" href="#/documents/getFor/{{ userId }}">Documents</a></li>
             <li><a class="navbar-brand"  ng-show="isStudent()" href="#/exams/getFor/{{ userId }}">Exams</a></li>
             <li><a class="navbar-brand"  ng-show="isAdmin()" href="#/exams">Exams</a></li>

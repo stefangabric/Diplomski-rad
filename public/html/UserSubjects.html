@@ -11,14 +11,17 @@
                 <small class="text-muted">ID: {{ subject._id }}</small>
             </p>
             <a ng-show="isProfessor()" ng-click="takeSubjectId(subject._id)" ng-model="button"
-               href="#/obligations/getFor/{{ subject._id }}" class="btn btn-xs btn-primary">obligations</a>
+               href="#/obligations/getFor/{{ subject._id }}" class="btn btn-xs btn-primary">Obligations</a>
 
             <a ng-show="isProfessor()" ng-click="takeSubjectId(subject._id)" ng-model="button" href="#/addOrUpdateExam"
-               class="btn btn-xs btn-primary">grades</a>
+               class="btn btn-xs btn-primary">Grades</a>
             <a ng-show="isProfessor()" ng-model="button" href="#/students/getStudentsInSubject/{{ subject._id }}"
-               class="btn btn-xs btn-success">Students</a>
-           <a ng-show="isStudent()" ng-model="button" href="#/addOrUpdateTransaction" class="btn btn-xs btn-primary">apply
-                for exam</a></div>
+               class="btn btn-xs btn-primary">Students</a>
+
+           <a ng-show="isStudent()" ng-model="button" href="#/addOrUpdateTransaction" class="btn btn-xs btn-primary">Apply
+                for exam</a>
+            <a ng-model="button" href="#/documents/getForSubject/{{subject._id}}" class="btn btn-xs btn-primary">See documents</a></div>
+    </div>
 
     </div>
 </div>

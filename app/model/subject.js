@@ -22,14 +22,16 @@ var subjectSchema = new Schema({
         required: false
     }],
     students : [{ type: Schema.Types.ObjectId, ref: 'User',required: false }],
-    obligations : [{ type: Schema.Types.ObjectId, ref: 'Obligation',required: false }]
+    obligations : [{ type: Schema.Types.ObjectId, ref: 'Obligation',required: false }],
+    documents : [{ type: Schema.Types.ObjectId, ref: 'Document',required: false }]
 
 },{collection:'Subject'});
 
 subjectSchema.plugin(autoref, [
     'students.subjects',
     'obligations.subject',
-    'subject.professorRoles'
+    'subject.professorRoles',
+    'documents.subject'
 ]);
 // od sheme kreiramo model koji cemo koristiti
 

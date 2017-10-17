@@ -58,8 +58,14 @@ var app=angular.module('eObrazovanjeApp', [ 'angular-jwt' ,'ui.router','ngRoute'
         }).when('/addOrUpdateDocument', {
             templateUrl : '/html/addOrUpdateDocument.html',
             controller : 'DocumentController'
+        }).when('/addDocument/:id', {
+            templateUrl : '/html/ProfessorDocument.html',
+            controller : 'DocumentController'
         }).when('/documents/getFor/:id', {
-            templateUrl : '/html/allDocumetsForUser.html',
+            templateUrl : '/html/allDocumentsForUser.html',
+            controller : 'DocumentController'
+        }).when('/documents/getForSubject/:id', {
+            templateUrl : '/html/SubjectDocuments.html',
             controller : 'DocumentController'
         }).when('/exams', {
             templateUrl : '/html/Exams.html',
@@ -110,7 +116,7 @@ var app=angular.module('eObrazovanjeApp', [ 'angular-jwt' ,'ui.router','ngRoute'
             templateUrl : '/html/changePassword.html',
             controller : 'ChangePasswordController'
         }).otherwise({
-            redirectTo : '/#'
+            redirectTo : '/'
         });
     } ]);
 

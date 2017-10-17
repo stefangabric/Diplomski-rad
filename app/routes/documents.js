@@ -63,6 +63,14 @@ documentRouter.get('/', passport.authenticate('jwt', {session: false}), function
         res.send(subjects);
     }).populate('student');
 
+}).get('/InSubject/:subject', passport.authenticate('jwt', {session: false}), function (req, res, next) {
+
+    myModel.find({subject: req.params.subject}, function (err, subjects) {
+        if (err) return console.error(err);
+        console.log(subjects);
+        res.send(subjects);
+    }).populate('subject');
+
 }).post('/', passport.authenticate('jwt', {session: false}), function (req, res, next) {
     var token = getToken(req.headers);
     var decoded = jwt.decode(token, config.secret);
@@ -77,13 +85,28 @@ documentRouter.get('/', passport.authenticate('jwt', {session: false}), function
         }
     );
     res.send(document1);
+}).post('/addToSubject/:id', passport.authenticate('jwt', {session: false}), function (req, res, next) {
+    var token = getToken(req.headers);
+    var decoded = jwt.decode(token, config.secret);
+    if (!decoded.role || decoded.role != 'professor') {
+        return res.status(403).send({success: false, msg: 'Not allowed.'});
+    }
+    document1 = new myModel(req.body);
+    document1.subject=req.params.id;
+    document1.save(
+        function (err, document) {
+            if (err) return console.error(err);
+            console.log(document);
+        }
+    );
+    res.send(document1);
 }).post('/profilePic/:id', passport.authenticate('jwt', {session: false}), uploadPicture.single("file"), function (req, res, next) {
 
     res.send(req.file);
 }).post('/uploadAngular/:id', passport.authenticate('jwt', {session: false}), uploadDocument.single("file"), function (req, res, next) {
     var token = getToken(req.headers);
     var decoded = jwt.decode(token, config.secret);
-    if (!decoded.role || decoded.role != 'student') {
+    if (!decoded.role || decoded.role == 'admin') {
         return res.status(403).send({success: false, msg: 'Not allowed.'});
     }
     res.send(req.file);

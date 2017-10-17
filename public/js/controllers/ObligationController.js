@@ -7,24 +7,27 @@ angular.module('eObrazovanjeApp').controller(
         '$location',
         'AuthService',
         function ($rootScope, $scope, $http, $routeParams, AuthService, $location) {
-            if (localStorage.getItem('ngStorage-userId') == undefined) {
-                window.location = "#/login";
-            }
-            if (localStorage.getItem('ngStorage-token')) {
-                $http.defaults.headers.common.Authorization = localStorage.getItem('ngStorage-token').replace(/['"]+/g, '');
-                console.log($http.defaults.headers.common);
-            }
-            $rootScope.userId = localStorage.getItem('ngStorage-userId').replace(/['"]+/g, '');
-            $scope.getProfessor = function (id) {
-                $http.get('api/obligations/' + id).success(
-                    function (data, status) {
-                        $scope.obligation = data;
+          $scope.initObligation = function () {
+                $scope.obligation = {};
 
-                    }).error(function () {
-                    $scope.redAlert = true;
+                if ($routeParams && $routeParams.id) {
+                    // ovo je edit stranica
+                    $http.get('api/obligations/' + $routeParams.id).success(
+                        function (data) {
+                            $scope.obligation = data;
+                        }).error(function () {
 
+                    });
+                }
+            };
+            $scope.getAllObligations = function () {
+                $http.get('api/obligations/all').success(function (data, status) {
+                    $scope.obligations = data;
+                }).error(function () {
+                    alert('Oops, something went wrong!');
                 });
             };
+
 
             $scope.getUserObligations = function () {
                 $http.get('api/obligations/getFor/' + $routeParams.id).success(function (data, status) {
@@ -55,13 +58,7 @@ angular.module('eObrazovanjeApp').controller(
                     });
                 }
             };
-            $scope.getAllObligations = function () {
-                $http.get('api/obligations/all').success(function (data, status) {
-                    $scope.obligations = data;
-                }).error(function () {
-                    alert('Oops, something went wrong!');
-                });
-            };
+
             $scope.deleteObligation = function (id) {
                 $http.delete('api/obligations/' + id).success(
                     function (data, status) {
@@ -84,19 +81,15 @@ angular.module('eObrazovanjeApp').controller(
                 $scope.blueAlert = false;
                 $scope.orangeAlert = false;
             };
+            $scope.getProfessor = function (id) {
+                $http.get('api/obligations/' + id).success(
+                    function (data, status) {
+                        $scope.obligation = data;
 
-            $scope.initObligation = function () {
-                $scope.obligation = {};
+                    }).error(function () {
+                    $scope.redAlert = true;
 
-                if ($routeParams && $routeParams.id) {
-                    // ovo je edit stranica
-                    $http.get('api/obligations/' + $routeParams.id).success(
-                        function (data) {
-                            $scope.obligation = data;
-                        }).error(function () {
-
-                    });
-                }
+                });
             };
 
             $scope.saveObligation = function () {

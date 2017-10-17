@@ -1,0 +1,28 @@
+<table ng-init="getAllDocumentsInSubject()" class="table table-bordered">
+    <thead class="thead-inverse">
+    <tr>
+        <th>Name</th>
+        <th></th>
+        <th ng-show="isProfessor()"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="document in documents">
+        <td>{{ document.name }}</td>
+
+        <td>
+            <a target="_blank" href="{{document.path}}" class="btn btn-xs btn-primary">Preview</a>
+        </td>
+        <td ng-show="isProfessor()">
+            <button ng-show="isProfessor()" ng-model="button" ng-click="hideAlerts();deleteDocument(document._id)"
+                    class="btn btn-xs btn-danger">Delete
+            </button>
+
+        </td>
+
+    </tr>
+
+    </tbody>
+</table>
+<a ng-show="isProfessor()" ng-model="button" href="#/addDocument/{{subject._id}}"
+   class="btn btn-xs btn-primary">Add a document</a>

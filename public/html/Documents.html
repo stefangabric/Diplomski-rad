@@ -11,10 +11,10 @@
 			<td>{{ document.name }}</td>
 
 			<td>
-				<button ng-model="button" ng-click="hideAlerts();deleteDocument(document.id)" class="btn btn-xs btn-danger">Delete</button>
+				<button ng-model="button" ng-click="hideAlerts();deleteDocument(document._id)" class="btn btn-xs btn-danger">Delete</button>
 			</td>
 			<td>
-				<a href="#/documents/edit/{{ document.id }}" class="btn btn-xs btn-primary">Edit</a>
+				<a href="#/documents/edit/{{ document._id }}" class="btn btn-xs btn-primary">Edit</a>
 			</td>
 		</tr>
 		

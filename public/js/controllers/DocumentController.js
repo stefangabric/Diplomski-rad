@@ -64,6 +64,17 @@ angular.module('eObrazovanjeApp')
                     $scope.resetFilter = function () {
                     }
                 };
+                $scope.getAllDocumentsInSubject = function () {
+                    $scope.subject_id= $routeParams.id;
+                    $http.get('api/documents/InSubject/'+ $scope.subject_id).success
+                    (function (data, status) {
+                        $scope.documents = data;
+                    }).error(function () {
+                        alert('Oops, something went wrong!');
+                    });
+                    $scope.resetFilter = function () {
+                    }
+                };
 
                 $scope.deleteDocument = function (id) {
                     $http.delete('api/documents/' + id).success(
@@ -95,27 +106,39 @@ angular.module('eObrazovanjeApp')
                         });
                     }
                 };
+                $scope.initDocument2 = function () {
+                    $scope.document = {};
+                };
 
                 $scope.saveDocument = function () {
 
                     $scope.document.student = $rootScope.userId;
-
-                    if ($scope.document._id) {
-                        // edit stranica
-                        $http.put('api/documents/' + $scope.document._id,
+                    if (true) {
+                        $http.post('api/documents/addToSubject/' + $routeParams.id,
                             $scope.document).success(function () {
-                            window.location = "#/documents/getFor/" + $rootScope.userId;
+                            window.location = "#/documents/getForSubject/" + $rootScope.userId;
                         }).error(function () {
                             alert("neka greska edita");
                         });
-                    } else {
-                        // add stranica
-                        $http.post('api/documents/', $scope.document).success(
-                            function () {
-                                window.location = "#/documents/getFor/" + $rootScope.userId;
+                    }
+                    else {
+                        if ($scope.document._id) {
+                            // edit stranica
+                            $http.put('api/documents/' + $scope.document._id,
+                                $scope.document).success(function () {
+                                window.location = "#/documents/getForS/" + $rootScope.userId;
                             }).error(function () {
-                            alert('greska dodavanja!')
-                        });
+                                alert("neka greska edita");
+                            });
+                        } else {
+                            // add stranica
+                            $http.post('api/documents/', $scope.document).success(
+                                function () {
+                                    window.location = "#/documents/getForS/" + $rootScope.userId;
+                                }).error(function () {
+                                alert('greska dodavanja!')
+                            });
+                        }
                     }
                 };
 

@@ -14,9 +14,7 @@
         function login(username, password, callback) {
             $http.post('/authenticate', { name: username, password: password })
                 .success(function (response,request) {
-                    // ukoliko postoji token, prijava je uspecna
                     if (response.token) {
-                        // korisnicko ime, token i rola (ako postoji) cuvaju se u lokalnom skladištu
                         $localStorage.token=response.token;
                         var currentUser = { username: username, token: response.token };
                         var tokenPayload = jwtHelper.decodeToken(response.token);
@@ -24,27 +22,29 @@
                         if(tokenPayload.role){
                             currentUser.role = tokenPayload.role;
                         }
-                        // prijavljenog korisnika cuva u lokalnom skladistu
                         $localStorage.currentUser = currentUser;
                         $localStorage.userId =userId;
                         $localStorage.role=tokenPayload.role;
                         $rootScope.userId=userId;
-                        // jwt token dodajemo u to auth header za sve $http zahteve
-                        $http.defaults.headers.common.Authorization = response.token;
-                        // callback za uspesan login
                         callback(true);
-                        window.location="#/students";
-                        window.location.reload(false);
                         $http.defaults.headers.common.Authorization = response.token;
+                        if(tokenPayload.role=='professor'){
+                            window.location ="#/subjects/getForP/"+userId;
+                        }
+                        if(tokenPayload.role=='admin'){
+                            window.location ="#/professors";
+                        }
+                        if(tokenPayload.role=='student'){
+                            window.location ="#/subjects/getForS/"+userId;
+                        }
+                        window.location.reload(false);
 
                     } else {
-                        // callback za neuspesan login
                         callback(false);
                         window.location ="#/login";
                     }
                 });
         }
-
         function logout() {
             // uklonimo korisnika iz lokalnog skladišta
             if($localStorage.currentUser!=undefined ){
@@ -54,7 +54,6 @@
                 window.location="#/login";
             }
         }
-
         function getCurrentUser() {
             return $localStorage.currentUser;
         }

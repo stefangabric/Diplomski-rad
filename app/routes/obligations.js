@@ -5,9 +5,8 @@ var passport = require('passport');
 var config = require('../config/database'); // get db config file
 var jwt = require('jwt-simple');
 var myModel = mongoose.model("Obligation");
-// ruter za obligation
+
 var obligationRouter = express.Router();
-// definisanje ruta za obligacije
 obligationRouter.get('/', passport.authenticate('jwt', {session: false}), function (req, res, next) {
     var token = getToken(req.headers);
     var decoded = jwt.decode(token, config.secret);
@@ -79,7 +78,6 @@ obligationRouter.get('/', passport.authenticate('jwt', {session: false}), functi
                 if (err) next(err);
                 res.json(obligation1);
             });
-
         });
 }).delete('/:id', passport.authenticate('jwt', {session: false}), function (req, res, next) {
     var token = getToken(req.headers);

@@ -21,6 +21,10 @@ var documentSchema = new Schema({
     student: {
         type: Schema.ObjectId,
         ref:'User'
+    },
+    subject: {
+        type: Schema.ObjectId,
+        ref:'Subject'
     }
    
 },{collection:'Document'});
@@ -28,7 +32,8 @@ var documentSchema = new Schema({
 // od sheme kreiramo model koji cemo koristiti
 documentSchema.plugin(mongoosePaginate);
 documentSchema.plugin(autoref, [
-    'student.documents'
+    'student.documents',
+    'subject.documents'
 ]);
 var Document = mongoose.model('Document', documentSchema);
 
